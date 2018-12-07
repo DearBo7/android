@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dan.testday3">
+
+    <!--另外：设计到一些需要访问清单文件，或者是pakageManager类的时候，适配8.0需要加入新的权限。-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <!--网络权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name="com.dan.testday3.DanMainActivity">
+            <intent-filter>
+                <!--主界面-->
+                <action android:name="android.intent.action.MAIN" />
+                <!---->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.dan.testday3.LayoutEditorAbsoluteActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainPageStyle" />
+        <activity
+            android:name="com.dan.testday3.LinearLayoutTestActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainPageStyle" />
+        <activity
+            android:name="com.dan.testday3.Test1Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainPageStyle" />
+        <activity
+            android:name="com.dan.testday3.Test2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainPageStyle" />
+        <activity
+            android:name="com.dan.testday3.ListViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainPageStyle" />
+        <activity
+            android:name="com.dan.testday3.RelativelayoutDomeActitity"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainPageStyle" />
+        <activity
+            android:name="com.dan.testday3.FrameLayoutDomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainPageStyle" />
+        <activity
+            android:name="com.dan.testday3.LinearLayoutDomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainPageStyle" />
+        <activity
+            android:name="com.dan.testday3.StudentManagementActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainPageStyle" />
+        <activity
+            android:name="com.dan.testday3.WebImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainPageStyle" />
+
+    </application>
+
+</manifest>

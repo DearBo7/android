@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--
+      android:layout_centerHorizontal="true" 在父布局中水平居中
+      android:layout_centerVertical="true"   在父布局中垂直居中
+      android:layout_centerInParent="true"   在父布局中居中
+
+      android:layout_toRightOf           在指定控件的右边
+      android:layout_toLeftOf            在指定控件的左边
+      android:layout_above               在指定控件的上边
+      android:layout_below               在指定控件的下边
+
+      android:layout_alignBaseline       跟指定控件水平对齐
+      android:layout_alignLeft           跟指定控件左对齐
+      android:layout_alignRight          跟指定控件右对齐
+      android:layout_alignTop            跟指定控件顶部对齐中
+      android:layout_alignBottom         跟指定控件底部对齐
+
+      android:layout_alignParentLeft     是否跟父布局左对齐
+      android:layout_alignParentTop      是否跟父布局顶部对齐
+      android:layout_alignParentRight    是否跟父布局右对齐
+      android:layout_alignParentBottom   是否跟父布局底部对齐
+     -->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="杰儿" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="傻超" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="金科" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="逃跑" />
+
+    <Button
+        android:id="@+id/btn_pt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="平头" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/btn_pt"
+        android:layout_toLeftOf="@id/btn_pt"
+        android:text="左" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_pt"
+        android:layout_centerInParent="true"
+        android:text="上" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/btn_pt"
+        android:layout_toRightOf="@id/btn_pt"
+        android:text="右" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_pt"
+        android:layout_centerInParent="true"
+        android:text="下" />
+
+</RelativeLayout>

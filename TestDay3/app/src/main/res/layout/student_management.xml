@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingVertical="5dp"
+        android:text="学生管理系统"
+        android:textColor="#0048d8"
+        android:textSize="28sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tx_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:paddingHorizontal="20dp"
+            android:text="姓名"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tx_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tx_name"
+            android:paddingHorizontal="20dp"
+            android:text="性别"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tx_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tx_sex"
+            android:paddingHorizontal="20dp"
+            android:text="年龄"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tx_name"
+            android:layout_alignRight="@id/tx_name"
+            android:layout_below="@id/tx_name"
+            android:maxLength="5" />
+
+        <EditText
+            android:id="@+id/et_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tx_sex"
+            android:layout_alignRight="@id/tx_sex"
+            android:layout_below="@id/tx_sex"
+            android:maxLength="1" />
+
+        <EditText
+            android:id="@+id/et_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tx_age"
+            android:layout_alignRight="@id/tx_age"
+            android:layout_below="@id/tx_age"
+            android:inputType="number"
+            android:maxLength="3" />
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/et_age"
+            android:layout_alignParentRight="true"
+            android:layout_alignRight="@id/et_age"
+            android:text="添加"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="50dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/li_list_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_save_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="保存数据" />
+
+        <Button
+            android:id="@+id/btn_hf_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="恢复数据" />
+
+        <Button
+            android:id="@+id/btn_del_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="删除数据" />
+    </LinearLayout>
+
+</LinearLayout>

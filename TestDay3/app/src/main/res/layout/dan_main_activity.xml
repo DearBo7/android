@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dan.testday3.DanMainActivity">
+
+    <!--
+    layout_constraintLeft_toLeftOf:我在左边,在别人的左边
+    layout_constraintRight_toLeftOf:我在右边,在别人的左边
+    layout_constraintHorizontal_bias（水平方向偏移）（范围0-1） 0.5就在两个元素中间
+    layout_constraintVertical_bias（垂直方向偏移）（范围0-1）
+    总结：
+        1.通过8个边界约束属性可以固定View的最左边、最右边、最上面、最下面的位置
+        2.通过设置偏移属性，可以控制View在边界范围移动，最左边是0，最右边是1，中间是0.5
+        3.当设置了边界约束属性后，View会自动出现在中间，也就是说，默认的偏移属性是0.5
+    -->
+    <Button
+        android:id="@+id/btn_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A_评分"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_b"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="B_Dome"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toRightOf="@id/btn_a"
+        app:layout_constraintRight_toLeftOf="@id/btn_c" />
+
+    <Button
+        android:id="@+id/btn_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List_PF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btn_b"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+    <!--
+        大小控制:
+            layout_constraintHorizontal_weight //水平方向上比重，类似线性布局
+            layout_constraintVertical_weight  //垂直方向上比重，类似线性布局
+        结论：
+            1.实现水平方向线性布局，所有的View都必须设置左右边界控制属性，而且相互控制
+            2.实现比重大小控制，必须设置layout_width=”0dp”
+    -->
+    <Button
+        android:id="@+id/btn_d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="相对布局"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_e"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_a" />
+
+    <Button
+        android:id="@+id/btn_e"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="帧布局"
+        app:layout_constraintLeft_toRightOf="@id/btn_d"
+        app:layout_constraintRight_toLeftOf="@id/btn_f"
+        app:layout_constraintTop_toBottomOf="@id/btn_b" />
+
+    <Button
+        android:id="@+id/btn_f"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="线性布局"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_e"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_c" />
+
+
+    <Button
+        android:id="@+id/btn_g"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="新增学生"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_h"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_d" />
+
+    <Button
+        android:id="@+id/btn_h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="网络图片"
+        app:layout_constraintLeft_toRightOf="@id/btn_g"
+        app:layout_constraintRight_toLeftOf="@id/btn_i"
+        app:layout_constraintTop_toBottomOf="@id/btn_e" />
+
+    <Button
+        android:id="@+id/btn_i"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_f" />
+
+    <Button
+        android:id="@+id/btn_j"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="J"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_k"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_g" />
+
+    <Button
+        android:id="@+id/btn_k"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="K"
+        app:layout_constraintLeft_toRightOf="@id/btn_j"
+        app:layout_constraintRight_toLeftOf="@id/btn_l"
+        app:layout_constraintTop_toBottomOf="@id/btn_h" />
+
+    <Button
+        android:id="@+id/btn_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="L"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_i" />
+
+    <Button
+        android:id="@+id/btn_m"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="M"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_n"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_j" />
+
+    <Button
+        android:id="@+id/btn_n"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="N"
+        app:layout_constraintLeft_toRightOf="@id/btn_m"
+        app:layout_constraintRight_toLeftOf="@id/btn_o"
+        app:layout_constraintTop_toBottomOf="@id/btn_k" />
+
+    <Button
+        android:id="@+id/btn_o"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="O"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_l" />
+
+
+    <!-- 星级评分条 -->
+    <RatingBar
+        android:id="@+id/ratingBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:rating="3.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/btn_tz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转"
+        app:layout_constraintBottom_toTopOf="@id/ratingBar1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

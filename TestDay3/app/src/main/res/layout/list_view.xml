@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--
+        descendantFocusability:
+            beforeDescendants：viewgroup会优先其子类控件而获取到焦点
+            afterDescendants：viewgroup只有当其子类控件不需要获取焦点时才获取焦点
+            blocksDescendants：viewgroup会覆盖子类控件而直接获得焦点(一般使用这种)
+    -->
+    <ListView
+        android:id="@+id/list_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:descendantFocusability="blocksDescendants"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:fadingEdge="none" />
+
+</android.support.constraint.ConstraintLayout>
