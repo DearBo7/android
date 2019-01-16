@@ -1,5 +1,6 @@
 package com.dan.httpasyn.appupdate.util;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -39,6 +40,9 @@ public class DownloadAppUtils {
      */
     public static final int DOWNLOAD_App_By3 = 2005;
 
+    @SuppressLint("StaticFieldLeak")
+    private static DownloadManager manager = null;
+
     /**
      * 通过浏览器下载APK包
      */
@@ -73,6 +77,10 @@ public class DownloadAppUtils {
      * 下载-判断
      */
     private static void downApK(Activity context, UpdateBean updateBean) {
+        if (manager != null) {
+            //释放资源
+            manager.release();
+        }
         switch (updateBean.getDownloadCode()) {
             case DOWNLOAD_BROWSER:
                 startBrowser(context, updateBean);
@@ -112,12 +120,7 @@ public class DownloadAppUtils {
         ConfirmDialog.showAlert(context, "发现新版本", updateInfo, "升级", true, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                try {
-                    DownloadManager.getInstance().release();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                DownloadManager manager = DownloadManager.getInstance(context);
+                manager = DownloadManager.getInstance(context);
                 manager.setApkName(apkName)
                         .setApkUrl(apkPath)
                         .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
@@ -128,12 +131,7 @@ public class DownloadAppUtils {
     }
 
     private static void startUpdate2(final Activity context, final String apkName, final String apkPath) {
-        try {
-            DownloadManager.getInstance().release();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        DownloadManager manager = DownloadManager.getInstance(context);
+        manager = DownloadManager.getInstance(context);
         manager.setApkName(apkName)
                 .setApkUrl(apkPath)
                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
@@ -194,8 +192,7 @@ public class DownloadAppUtils {
 
                     }
                 })*/;
-
-        DownloadManager manager = DownloadManager.getInstance(context);
+        manager = DownloadManager.getInstance(context);
         DownloadManager downloadManager = manager.setApkName(updateBean.getApkName())
                 .setApkUrl(updateBean.getApkPath())
                 .setSmallIcon(R.mipmap.ic_launcher)
