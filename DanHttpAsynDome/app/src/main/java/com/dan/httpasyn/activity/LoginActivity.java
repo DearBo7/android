@@ -140,6 +140,9 @@ public class LoginActivity extends BaseFinalActivity {
                     mLoading.dismiss();
                     System.out.println("errorNo:" + errorNo + ",strMsg:" + strMsg + ",Throwable:" + t);
                     ToastUtil.makeText(LoginActivity.this, HttpStatusCode.getHttpStatusMsg(errorNo));
+                    btnSubmit.setBackgroundResource(android.R.color.holo_blue_dark);
+                    btnSubmit.setEnabled(true);
+                    btnSubmit.setText("登录");
                 }
 
                 @Override
