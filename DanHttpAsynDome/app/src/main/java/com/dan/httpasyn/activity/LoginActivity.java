@@ -10,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.dan.httpasyn.activity.base.BaseFinalActivity;
+import com.dan.httpasyn.config.HttpConfig;
+import com.dan.httpasyn.config.HttpStatusCode;
 import com.dan.httpasyn.service.LoginService;
 import com.dan.httpasyn.util.AjaxResult;
 import com.dan.httpasyn.util.JsonUtil;
@@ -101,7 +103,7 @@ public class LoginActivity extends BaseFinalActivity {
         params.put("password", password);
         final FinalHttp http = new FinalHttp();
         try {
-            http.post("http://119.37.194.4:5555/xtp-api/user/loginUser", params, new AjaxCallBack<String>() {
+            http.post(HttpConfig.loginUrl, params, new AjaxCallBack<String>() {
 
                 @Override
                 public void onSuccess(String json) {
@@ -137,7 +139,7 @@ public class LoginActivity extends BaseFinalActivity {
                 public void onFailure(Throwable t, int errorNo, String strMsg) {
                     mLoading.dismiss();
                     System.out.println("errorNo:" + errorNo + ",strMsg:" + strMsg + ",Throwable:" + t);
-                    ToastUtil.makeText(LoginActivity.this, "errorNo:" + errorNo + ",strMsg:" + strMsg + ",Throwable:" + t);
+                    ToastUtil.makeText(LoginActivity.this, HttpStatusCode.getHttpStatusMsg(errorNo));
                 }
 
                 @Override
