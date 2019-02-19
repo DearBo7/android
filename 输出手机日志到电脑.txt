@@ -1,0 +1,1 @@
+Á¬½Óusbµ÷ÊÔ£ºadb logcat | find "AliMobileAutoCollectEnergyUtils" > A:/dan/auto1.txt
