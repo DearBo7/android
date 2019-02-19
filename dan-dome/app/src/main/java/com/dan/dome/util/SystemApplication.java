@@ -15,6 +15,15 @@ public class SystemApplication extends Application {
     public static String dataToken;
     public static String userPassword;
     public static User user;
+    public static String url;
+
+    public static String getUrl() {
+        return url;
+    }
+
+    public static void setUrl(String url) {
+        SystemApplication.url = url;
+    }
 
     public static User getUser() {
         return user;

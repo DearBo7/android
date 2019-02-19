@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dan.dome.activity">
+    package="com.dan.dome">
 
     <!--android:usesCleartextTraffic="true":安卓9,不加访问不了服务器->-->
     <application
@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
         </activity>
 
         <activity
-            android:name="com.dan.dome.activity.MainActivity"
+            android:name="com.dan.dome.MainActivity"
             android:configChanges="keyboard"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan" />

@@ -1,4 +1,4 @@
-package com.dan.library;
+package com.dan.dome;
 
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;

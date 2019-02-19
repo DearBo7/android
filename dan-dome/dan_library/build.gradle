@@ -27,8 +27,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    compileOnly 'com.github.bumptech.glide:glide:4.8.0'
-    compileOnly 'jp.wasabeef:glide-transformations:4.0.1'
     /*https://github.com/azhon/AppUpdate*/
     compileOnly 'com.azhon:appupdate:2.0.0'
     api 'org.apache.commons:commons-lang3:3.8'

@@ -9,11 +9,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.dan.dome.MainActivity;
+import com.dan.dome.R;
 import com.dan.dome.activity.base.BaseFinalActivity;
 import com.dan.dome.config.HttpConfig;
+import com.dan.dome.enums.LoginKeyEnum;
+import com.dan.dome.service.LoginService;
 import com.dan.dome.util.SystemApplication;
 import com.dan.library.config.HttpStatusCode;
-import com.dan.dome.service.LoginService;
 import com.dan.library.util.AjaxResult;
 import com.dan.library.util.JsonUtil;
 import com.dan.library.util.ToastUtil;
@@ -49,11 +52,6 @@ public class LoginActivity extends BaseFinalActivity {
 
     private LoginService loginService;
 
-    private String rememberPwdKey = "rememberPwdKey";
-    private String autoLoginKey = "autoLoginKey";
-    private String userNameKey = "userNameKey";
-    private String pwdKey = "pwdKey";
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,12 +59,12 @@ public class LoginActivity extends BaseFinalActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.login_activity);
         loginService = new LoginService(LoginActivity.this);
-        String account = loginService.getStringValue(userNameKey);
-        String password = loginService.getStringValue(pwdKey);
+        String account = loginService.getStringValue(LoginKeyEnum.USER_NAME.key);
+        String password = loginService.getStringValue(LoginKeyEnum.PWD.key);
         //自动登录
-        Boolean autoLoginFlag = loginService.getBooleanValue(autoLoginKey);
+        Boolean autoLoginFlag = loginService.getBooleanValue(LoginKeyEnum.AUTO_LOGIN.key);
         //记住密码
-        Boolean rememberPwdFlag = loginService.getBooleanValue(rememberPwdKey);
+        Boolean rememberPwdFlag = loginService.getBooleanValue(LoginKeyEnum.REMEMBER_PWD.key);
         if (rememberPwdFlag || autoLoginFlag) {
             etUserName.setText(account);
             etPwd.setText(password);
@@ -103,7 +101,7 @@ public class LoginActivity extends BaseFinalActivity {
         params.put("password", password);
         final FinalHttp http = new FinalHttp();
         try {
-            http.post(HttpConfig.loginUrl, params, new AjaxCallBack<String>() {
+            http.post(HttpConfig.getLoginUrl(), params, new AjaxCallBack<String>() {
 
                 @Override
                 public void onSuccess(String json) {
@@ -114,14 +112,14 @@ public class LoginActivity extends BaseFinalActivity {
                     AjaxResult result = JsonUtil.fromJson(json, AjaxResult.class);
                     if (result != null && result.getCode().equals(1)) {
                         if (cbRememberPwd.isChecked() || cbAutoLogin.isChecked()) {
-                            loginService.saveUser(userNameKey, account);
-                            loginService.saveUser(pwdKey, password);
+                            loginService.saveUser(LoginKeyEnum.USER_NAME.key, account);
+                            loginService.saveUser(LoginKeyEnum.PWD.key, password);
                         } else {
-                            loginService.deleteUser(userNameKey);
-                            loginService.deleteUser(pwdKey);
+                            loginService.deleteUser(LoginKeyEnum.USER_NAME.key);
+                            loginService.deleteUser(LoginKeyEnum.PWD.key);
                         }
-                        loginService.saveUser(rememberPwdKey, cbRememberPwd.isChecked());
-                        loginService.saveUser(autoLoginKey, cbAutoLogin.isChecked());
+                        loginService.saveUser(LoginKeyEnum.REMEMBER_PWD.key, cbRememberPwd.isChecked());
+                        loginService.saveUser(LoginKeyEnum.AUTO_LOGIN.key, cbAutoLogin.isChecked());
                         SystemApplication.setDataToken(result.getData().toString());
                         SystemApplication.setUserAccount(account);
                         SystemApplication.setUserPassword(password);

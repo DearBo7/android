@@ -19,9 +19,8 @@ allprojects {
         google()
         jcenter()
         //配置Maven仓库的地址
-        maven {
-            url "http://119.37.194.4:8081/repository/maven-releases/"
-        }
+        maven { url "http://119.37.194.4:8081/repository/maven-releases/" }
+        maven { url "https://jitpack.io" }
     }
 }
 
