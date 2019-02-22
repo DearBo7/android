@@ -14,7 +14,6 @@ import android.os.Environment;
 import com.azhon.appupdate.config.UpdateConfiguration;
 import com.azhon.appupdate.manager.DownloadManager;
 import com.azhon.appupdate.utils.ApkUtil;
-import com.dan.library.R;
 import com.dan.library.appupdate.model.UpdateBean;
 import com.dan.library.customview.ConfirmDialog;
 
@@ -86,10 +85,10 @@ public class DownloadAppUtils {
                 startBrowser(context, updateBean);
                 break;
             case DOWNLOAD_App_By1:
-                startUpdate1(context, updateBean.getApkName(), updateBean.getApkPath(), updateBean.getUpdateInfo());
+                startUpdate1(context, updateBean.getApkName(), updateBean.getApkPath(), updateBean.getUpdateInfo(), updateBean.getSmallIconId());
                 break;
             case DOWNLOAD_App_By2:
-                startUpdate2(context, updateBean.getApkName(), updateBean.getApkPath());
+                startUpdate2(context, updateBean.getApkName(), updateBean.getApkPath(), updateBean.getSmallIconId());
                 break;
             case DOWNLOAD_App_By3:
                 startUpdate3(context, updateBean);
@@ -116,7 +115,7 @@ public class DownloadAppUtils {
         }
     }
 
-    private static void startUpdate1(final Activity context, final String apkName, final String apkPath, String updateInfo) {
+    private static void startUpdate1(final Activity context, final String apkName, final String apkPath, String updateInfo, final int smallIconId) {
         ConfirmDialog.showAlert(context, "发现新版本", updateInfo, "升级", true, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -124,18 +123,18 @@ public class DownloadAppUtils {
                 manager.setApkName(apkName)
                         .setApkUrl(apkPath)
                         .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
-                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setSmallIcon(smallIconId)
                         .download();
             }
         });
     }
 
-    private static void startUpdate2(final Activity context, final String apkName, final String apkPath) {
+    private static void startUpdate2(Activity context, String apkName, String apkPath, int smallIconId) {
         manager = DownloadManager.getInstance(context);
         manager.setApkName(apkName)
                 .setApkUrl(apkPath)
                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(smallIconId)
                 .download();
     }
 
@@ -195,7 +194,7 @@ public class DownloadAppUtils {
         manager = DownloadManager.getInstance(context);
         DownloadManager downloadManager = manager.setApkName(updateBean.getApkName())
                 .setApkUrl(updateBean.getApkPath())
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(updateBean.getSmallIconId())
                 .setShowNewerToast(true)
                 .setConfiguration(configuration)
                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate");

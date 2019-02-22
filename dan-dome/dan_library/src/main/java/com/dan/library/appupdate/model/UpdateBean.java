@@ -1,5 +1,6 @@
 package com.dan.library.appupdate.model;
 
+import com.dan.library.R;
 import com.dan.library.appupdate.util.DownloadAppUtils;
 
 import java.io.Serializable;
@@ -66,6 +67,19 @@ public class UpdateBean implements Serializable {
      * 不是wifi状态是否提示
      */
     private boolean wifiFlag = false;
+
+    /**
+     * 通知栏图标id
+     */
+    private int smallIconId = R.mipmap.update_small_icon;
+
+    public int getSmallIconId() {
+        return smallIconId;
+    }
+
+    public void setSmallIconId(int smallIconId) {
+        this.smallIconId = smallIconId;
+    }
 
     public boolean isWifiFlag() {
         return wifiFlag;

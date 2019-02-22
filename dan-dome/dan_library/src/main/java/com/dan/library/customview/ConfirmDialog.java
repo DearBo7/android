@@ -48,16 +48,22 @@ public class ConfirmDialog extends Dialog {
     }
 
     public static void showAlert(Context context, String title, String message, OnClickListener listener) {
-        showAlert(context, title, message, "设置", false, listener);
+        showAlert(context, title, message, "设置", false, -1, listener);
     }
 
     public static void showAlert(Context context, String title, String message, String positiveBtnTxt, boolean cancelableFlag, OnClickListener listener) {
+        showAlert(context, title, message, positiveBtnTxt, cancelableFlag, -1, listener);
+    }
+
+    public static void showAlert(Context context, String title, String message, String positiveBtnTxt, boolean cancelableFlag, int iconId, OnClickListener listener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setPositiveButton(positiveBtnTxt, listener);
         builder.setCancelable(cancelableFlag);
-        builder.setIcon(R.mipmap.ic_launcher);
+        if (iconId > -1) {
+            builder.setIcon(iconId);
+        }
         AlertDialog dialog = builder.create();
         dialog.show();
     }
