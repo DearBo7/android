@@ -45,6 +45,7 @@ dependencies {
     /*https://github.com/zeroturnaround/zt-zip*/
     implementation 'org.zeroturnaround:zt-zip:1.13'
     implementation project(path: ':dan_library')
+    implementation project(path: ':two_list_library')
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'jp.wasabeef:glide-transformations:4.0.1'
@@ -52,4 +53,5 @@ dependencies {
     implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
     //Adapter终结者 地址：https://github.com/mcxtzhang/all-base-adapter
     implementation 'com.github.mcxtzhang:all-base-adapter:V1.8.0'
+    implementation 'com.github.arcadefire:nice-spinner:1.3.8'
 }
