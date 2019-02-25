@@ -1,4 +1,4 @@
-package com.dan.library.ui;
+package com.dan.ui.widget.item;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.dan.library.R;
+import com.dan.ui.R;
 
 /**
  * by:2019年2月15日17:03:32

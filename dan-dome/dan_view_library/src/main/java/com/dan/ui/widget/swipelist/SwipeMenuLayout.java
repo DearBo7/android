@@ -1,4 +1,4 @@
-package com.dan.library.ui;
+package com.dan.ui.widget.swipelist;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 
-import com.dan.library.R;
+import com.dan.ui.R;
 
 /**
  * 【Item侧滑删除菜单】

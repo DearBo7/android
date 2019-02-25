@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import com.dan.dome.R;
 import com.dan.dome.entity.Material;
 import com.dan.dome.fragment.base.BaseFragment;
-import com.dan.expand.adapter.SimpleSpinnerTextFormatter;
-import com.dan.expand.view.ExpandTabView;
-import com.dan.expand.view.ViewMiddle;
+import com.dan.ui.adapter.SimpleSpinnerTextFormatter;
+import com.dan.ui.widget.grouplist.ExpandTabView;
+import com.dan.ui.widget.grouplist.ViewMiddle;
 import com.dan.library.util.JsonUtil;
 import com.dan.library.util.ToastUtil;
 

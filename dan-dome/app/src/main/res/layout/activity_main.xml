@@ -81,6 +81,19 @@
             android:textSize="@dimen/shiliusp" />
 
         <RadioButton
+            android:id="@+id/rb_other_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/btn_weather_selector"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:text="其他"
+            android:textColor="@drawable/color_fenlei_selector"
+            android:textSize="@dimen/shiliusp" />
+
+        <RadioButton
             android:id="@+id/rb_my"
             android:layout_width="0dp"
             android:layout_height="match_parent"

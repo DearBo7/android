@@ -19,7 +19,7 @@ import com.dan.dome.fragment.base.BaseFragment;
 import com.dan.dome.service.LoginService;
 import com.dan.dome.util.SystemApplication;
 import com.dan.library.customview.ConfirmDialog;
-import com.dan.library.ui.ItemView;
+import com.dan.ui.widget.item.ItemView;
 import com.dan.library.util.ApkUtil;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
