@@ -16,6 +16,7 @@ public class SplashActivity extends AppCompatActivity {
 
     //两秒后进入系统
     private final int SPLASH_DISPLAY_TIME = 2000;
+    private boolean testFlag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +35,15 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
         //停留2秒然后进主页面
-        new android.os.Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                SplashActivity.this.startActivity(intent);
-                SplashActivity.this.finish();
+        new android.os.Handler().postDelayed(() -> {
+            Intent intent;
+            if (testFlag) {
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+            } else {
+                intent = new Intent(getApplicationContext(), LoginActivity.class);
             }
+            SplashActivity.this.startActivity(intent);
+            SplashActivity.this.finish();
         }, SPLASH_DISPLAY_TIME);
 
     }

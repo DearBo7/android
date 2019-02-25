@@ -52,7 +52,9 @@ public class OtherFragment extends BaseFragment {
 
         viewMiddle = new ViewMiddle(getContext());
         mViewArray.add(viewMiddle);
-        expandTabView.setValue(Arrays.asList("请选择原料"), mViewArray);
+        //设置创建时按钮禁用
+        expandTabView.setCreateToggleButtonEnabled(false);
+        expandTabView.setValue(Arrays.asList("原料加载中..."), mViewArray);
         //设置右边显示数据,格式化
         viewMiddle.setPlateTextFormatter(new SimpleSpinnerTextFormatter() {
             @Override
@@ -112,6 +114,8 @@ public class OtherFragment extends BaseFragment {
         if (material == null) {
             return;
         }
+        //有数据时,取消禁用
+        expandTabView.setToggleButton(true);
         Log.i(TAG, "设置默认选中:material:" + JsonUtil.toJson(material));
         ToastUtil.makeText(getContext(), "设置默认选中:material:" + JsonUtil.toJson(material));
         if (StringUtils.isNotBlank(viewMiddle.getShowText())) {

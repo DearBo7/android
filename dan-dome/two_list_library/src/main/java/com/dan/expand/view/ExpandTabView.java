@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,8 +34,12 @@ public class ExpandTabView extends LinearLayout implements OnDismissListener {
     private final int SMALL = 0;
     private int displayWidth;
     private int displayHeight;
-    private PopupWindow popupWindow;
+    private MyPopupWindow popupWindow;
     private int selectPosition;
+    /**
+     * false:禁用,true:不禁用【默认：true】
+     */
+    private boolean toggleButtonEnabledFlag = true;
 
     public ExpandTabView(Context context) {
         super(context);
@@ -72,6 +75,50 @@ public class ExpandTabView extends LinearLayout implements OnDismissListener {
     }
 
     /**
+     * 获取按钮
+     *
+     * @param index 下标
+     */
+    public ToggleButton getToggleButtons(int index) {
+        if (index > -1 && index < mToggleButton.size()) {
+            return mToggleButton.get(index);
+        }
+        return null;
+    }
+
+    /**
+     * 获取全部按钮
+     */
+    public List<ToggleButton> getToggleButtons() {
+        return mToggleButton;
+    }
+
+    /**
+     * 设置按钮禁用
+     */
+    public void setCreateToggleButtonEnabled(boolean toggleButtonEnabledFlag) {
+        this.toggleButtonEnabledFlag = toggleButtonEnabledFlag;
+    }
+
+    public boolean setToggleButton(int index, boolean enabled) {
+        if (index > -1 && index < mToggleButton.size()) {
+            mToggleButton.get(index).setEnabled(enabled);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setToggleButton(boolean enabled) {
+        if (mToggleButton.size() > 0) {
+            for (ToggleButton toggleButton : mToggleButton) {
+                toggleButton.setEnabled(enabled);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * 设置tabitem的个数和初始值
      */
     public void setValue(List<String> textArray, List<View> viewArray) {
@@ -101,6 +148,7 @@ public class ExpandTabView extends LinearLayout implements OnDismissListener {
             mToggleButton.add(tButton);
             tButton.setTag(i);
             tButton.setText(mTextArray.get(i));
+            tButton.setEnabled(toggleButtonEnabledFlag);
 
             r.setOnClickListener(new OnClickListener() {
                 @Override
@@ -133,7 +181,7 @@ public class ExpandTabView extends LinearLayout implements OnDismissListener {
     private void startAnimation() {
 
         if (popupWindow == null) {
-            popupWindow = new PopupWindow(mViewArray.get(selectPosition), displayWidth, displayHeight);
+            popupWindow = new MyPopupWindow(mViewArray.get(selectPosition), displayWidth, displayHeight);
             popupWindow.setAnimationStyle(R.style.PopupWindowAnimation);
 
             popupWindow.setFocusable(false);
