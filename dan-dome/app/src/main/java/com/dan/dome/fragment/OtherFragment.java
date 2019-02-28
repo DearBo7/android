@@ -7,15 +7,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.dan.dome.R;
+import com.dan.dome.entity.City;
 import com.dan.dome.entity.Material;
 import com.dan.dome.fragment.base.BaseFragment;
+import com.dan.library.util.JsonUtil;
+import com.dan.library.util.ToastUtil;
 import com.dan.ui.adapter.SimpleSpinnerTextFormatter;
 import com.dan.ui.widget.grouplist.ExpandTabView;
 import com.dan.ui.widget.grouplist.ViewMiddle;
-import com.dan.library.util.JsonUtil;
-import com.dan.library.util.ToastUtil;
+import com.dan.ui.widget.searchselect.SerachSelectDialog;
 
 import org.angmarch.views.NiceSpinner;
 import org.apache.commons.lang3.StringUtils;
@@ -31,12 +35,19 @@ import java.util.Map;
  */
 public class OtherFragment extends BaseFragment {
     private static final String TAG = "OtherFragment";
+    //下拉列表
     private NiceSpinner niceSpinner;
 
+    //ExpandTabView 点击按首字母筛选
     private ExpandTabView expandTabView;
     private List<View> mViewArray = new ArrayList<View>();
     private ViewMiddle viewMiddle;
     private Map<String, List<Material>> mapList = new LinkedHashMap<>();
+
+    //弹框搜索
+    Button btnOpenSearchDialog;
+    private TextView textSearchResultView;
+    private List<City> mDataList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +79,10 @@ public class OtherFragment extends BaseFragment {
                 return new SpannableString(value);
             }
         });
+
+        //弹出搜索
+        btnOpenSearchDialog = view.findViewById(R.id.btn_open_search_dialog);
+        textSearchResultView = view.findViewById(R.id.tv_search_result);
         setData();
     }
 
@@ -86,6 +101,40 @@ public class OtherFragment extends BaseFragment {
                 }
             }
         });
+        //设置弹出按钮
+        btnOpenSearchDialog.setOnClickListener(v -> {
+            //调用弹出窗口
+            openSearchSelectDialog();
+        });
+    }
+
+    private void openSearchSelectDialog() {
+        SerachSelectDialog.Builder alert = new SerachSelectDialog.Builder(getContext());
+        alert.setSpinnerTextFormatter(new SimpleSpinnerTextFormatter() {
+            @Override
+            public Spannable format(Object item) {
+                String value;
+                if (item instanceof City) {
+                    City item1 = (City) item;
+                    value = item1.getName() + "==" + item1.getId();
+                } else {
+                    value = item.toString();
+                }
+                return new SpannableString(value);
+            }
+        });
+        alert.setListData(mDataList);
+        alert.setTitle("请选择城市");
+        alert.setSelectedListener(new SerachSelectDialog.Builder.OnSelectedListener() {
+            @Override
+            public void onSelected(String showText, int position, Object t) {
+                textSearchResultView.setText(showText);
+            }
+
+        });
+        SerachSelectDialog mDialog = alert.show();
+        //设置Dialog 尺寸
+        mDialog.setDialogWindowAttr(0.9, 0.9, getActivity());
     }
 
     private void setData() {
@@ -120,6 +169,21 @@ public class OtherFragment extends BaseFragment {
         ToastUtil.makeText(getContext(), "设置默认选中:material:" + JsonUtil.toJson(material));
         if (StringUtils.isNotBlank(viewMiddle.getShowText())) {
             expandTabView.setTitle(viewMiddle.getShowText(), 0);
+        }
+
+
+        //设置弹出框搜索数据
+        mDataList = new ArrayList<>();
+        String[] citys = {"武汉", "北京", "上海", "深圳", "兰州", "成都", "天津"};
+        City city;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < citys.length; j++) {
+                city = new City();
+                city.setId((i + j) + 10);
+                city.setCode("Code:" + citys[j] + i);
+                city.setName(citys[j] + i);
+                mDataList.add(city);
+            }
         }
     }
 

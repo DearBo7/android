@@ -28,4 +28,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp" />
 
+    <TextView
+        android:id="@+id/tv_search_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ff5c5c"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btn_open_search_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_bg"
+        android:gravity="center"
+        android:text="打开选择器"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
 </LinearLayout>

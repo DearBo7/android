@@ -7,6 +7,7 @@
     <color name="head_background_back_C81743">#00C5CD</color>
     <color name="head_background_back_1A2C5E">#1A2C5E</color>
     <color name="head_background_back_all">#204289</color>
+    <color name="colorTheme">#108EE9</color>
 
     <color name="bg_black">#000000</color>
     <color name="bg_white">#FFFFFF</color>

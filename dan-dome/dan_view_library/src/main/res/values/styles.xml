@@ -5,4 +5,9 @@
         <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
     </style>
 
+    <style name="selectDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>//无标题
+        <item name="android:windowBackground">@color/no_color</item>
+    </style>
+
 </resources>
