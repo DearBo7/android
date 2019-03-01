@@ -19,6 +19,10 @@ public class SearchSelectAdapter<T> extends BaseAdapter {
     private LayoutInflater inflater;
     private SpinnerTextFormatter spinnerTextFormatter;
 
+    public SearchSelectAdapter(Context ctx) {
+        this(ctx, null, new SimpleSpinnerTextFormatter());
+    }
+
     public SearchSelectAdapter(Context ctx, List<T> mList) {
         this(ctx, mList, new SimpleSpinnerTextFormatter());
     }
@@ -32,17 +36,20 @@ public class SearchSelectAdapter<T> extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mList.size();
+        return this.mList != null ? this.mList.size() : 0;
     }
 
     @Override
-    public T getItem(int i) {
-        return mList.get(i);
+    public T getItem(int position) {
+        if (this.mList != null && position > -1 && position < this.mList.size()) {
+            return this.mList.get(position);
+        }
+        return null;
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
+    public long getItemId(int position) {
+        return this.mList != null ? (long) position : -1;
     }
 
     @Override
@@ -55,11 +62,54 @@ public class SearchSelectAdapter<T> extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-
-        holder.info.setText(spinnerTextFormatter.format(mList.get(i)).toString());
+        if (mList != null && mList.size() > 0) {
+            holder.info.setText(spinnerTextFormatter.format(mList.get(i)).toString());
+        }
         return view;
     }
 
+    public List<T> getItemAll() {
+        return this.mList;
+    }
+
+    public void setData(List<T> collection) {
+        if (this.mList == null) {
+            this.mList = collection;
+        } else {
+            this.mList.clear();
+            if (collection != null) {
+                this.mList.addAll(collection);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 添加一个元素
+     */
+    public void add(T item) {
+        if (item != null) {
+            this.mList.add(item);
+        }
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 添加多个元素
+     */
+    public void add(List<T> collection) {
+        if (collection != null) {
+            this.mList.addAll(collection);
+        }
+        notifyDataSetChanged();
+    }
+
+    public void clear() {
+        if (this.mList != null) {
+            this.mList.clear();
+            notifyDataSetChanged();
+        }
+    }
 
     static class ViewHolder {
         TextView info;

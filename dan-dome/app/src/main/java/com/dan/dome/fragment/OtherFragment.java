@@ -19,7 +19,7 @@ import com.dan.library.util.ToastUtil;
 import com.dan.ui.adapter.SimpleSpinnerTextFormatter;
 import com.dan.ui.widget.grouplist.ExpandTabView;
 import com.dan.ui.widget.grouplist.ViewMiddle;
-import com.dan.ui.widget.searchselect.SerachSelectDialog;
+import com.dan.ui.widget.searchselect.SearchSelectDialog;
 
 import org.angmarch.views.NiceSpinner;
 import org.apache.commons.lang3.StringUtils;
@@ -48,6 +48,7 @@ public class OtherFragment extends BaseFragment {
     Button btnOpenSearchDialog;
     private TextView textSearchResultView;
     private List<City> mDataList;
+    private SearchSelectDialog searchSelectDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,6 +85,9 @@ public class OtherFragment extends BaseFragment {
         btnOpenSearchDialog = view.findViewById(R.id.btn_open_search_dialog);
         textSearchResultView = view.findViewById(R.id.tv_search_result);
         setData();
+        createSearchSelectDialog();
+        //设置数据
+        searchSelectDialog.getBuilder().setDataSource(mDataList);
     }
 
     private void initListener() {
@@ -104,37 +108,35 @@ public class OtherFragment extends BaseFragment {
         //设置弹出按钮
         btnOpenSearchDialog.setOnClickListener(v -> {
             //调用弹出窗口
-            openSearchSelectDialog();
+            searchSelectDialog.show();
         });
     }
 
-    private void openSearchSelectDialog() {
-        SerachSelectDialog.Builder alert = new SerachSelectDialog.Builder(getContext());
-        alert.setSpinnerTextFormatter(new SimpleSpinnerTextFormatter() {
+    private void createSearchSelectDialog() {
+        SearchSelectDialog.Builder alert = new SearchSelectDialog.Builder(getContext());
+        searchSelectDialog = alert.setSpinnerTextFormatter(new SimpleSpinnerTextFormatter() {
             @Override
             public Spannable format(Object item) {
                 String value;
                 if (item instanceof City) {
                     City item1 = (City) item;
-                    value = item1.getName() + "==" + item1.getId();
+                    value = item1.getName() + "=new=" + item1.getId();
                 } else {
                     value = item.toString();
                 }
                 return new SpannableString(value);
             }
-        });
-        alert.setListData(mDataList);
-        alert.setTitle("请选择城市");
-        alert.setSelectedListener(new SerachSelectDialog.Builder.OnSelectedListener() {
+        }).setItemSelectedListener(new SearchSelectDialog.OnSelectedListener() {
             @Override
             public void onSelected(String showText, int position, Object t) {
                 textSearchResultView.setText(showText);
+                ToastUtil.makeText(getContext(), "showText:" + showText);
+                Log.i(TAG, "showText:" + showText + ";t:" + JsonUtil.toJson(t));
             }
 
-        });
-        SerachSelectDialog mDialog = alert.show();
+        }).setTitle("自定义标题").setReservedFlag(true).builder();
         //设置Dialog 尺寸
-        mDialog.setDialogWindowAttr(0.9, 0.9, getActivity());
+        searchSelectDialog.setDialogWindowAttr(0.9, 0.9, getActivity());
     }
 
     private void setData() {

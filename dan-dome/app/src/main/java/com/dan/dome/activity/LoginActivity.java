@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -19,6 +18,7 @@ import com.dan.dome.util.SystemApplication;
 import com.dan.library.config.HttpStatusCode;
 import com.dan.library.util.AjaxResult;
 import com.dan.library.util.JsonUtil;
+import com.dan.library.util.StatusBarUtils;
 import com.dan.library.util.ToastUtil;
 
 import net.tsz.afinal.FinalHttp;
@@ -55,8 +55,8 @@ public class LoginActivity extends BaseFinalActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //表示设置当前的Activity 无Title并且全屏
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //设置状态栏透明
+        StatusBarUtils.setWindowStatusBarColor(this);
         setContentView(R.layout.login_activity);
         loginService = new LoginService(LoginActivity.this);
         String account = loginService.getStringValue(LoginKeyEnum.USER_NAME.key);

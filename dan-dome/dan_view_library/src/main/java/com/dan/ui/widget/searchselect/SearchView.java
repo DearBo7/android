@@ -18,6 +18,11 @@ import com.dan.ui.R;
  */
 public class SearchView extends LinearLayout implements View.OnClickListener {
 
+    private final static String TAG = "SearchView";
+    /**
+     * 空字符串
+     */
+    public final static String STRING_EMPTY = "";
     /**
      * 输入框
      */
@@ -36,14 +41,24 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
     /**
      * 搜索回调接口
      */
-    private onSearchViewListener mListener;
+    private OnSearchViewListener mListener;
+
+    /**
+     * 设置搜索内容
+     */
+    public void setSearchText(String searchText) {
+        if (etInput != null) {
+
+            etInput.setText(searchText);
+        }
+    }
 
     /**
      * 设置搜索回调接口
      *
      * @param listener 监听者
      */
-    public void setSearchViewListener(onSearchViewListener listener) {
+    public void setSearchViewListener(OnSearchViewListener listener) {
         mListener = listener;
     }
 
@@ -64,36 +79,48 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
     }
 
     private class EditChangedListener implements TextWatcher {
+
+        /**
+         * 修改之前的文字
+         */
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-
+            //Log.i(TAG, "beforeTextChanged===" + charSequence.toString());
         }
 
+        /**
+         * 改变后的字符串
+         */
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            if (!"".equals(charSequence.toString())) {
+            //Log.i(TAG, "onTextChanged===" + charSequence.toString());
+            String value = charSequence.toString();
+            if (!STRING_EMPTY.equals(value)) {
                 ivDelete.setVisibility(VISIBLE);
-                //更新autoComplete数据
-                if (mListener != null) {
-                    mListener.onQueryTextChange(charSequence + "");
-                }
             } else {
                 ivDelete.setVisibility(GONE);
             }
-
+            //更新autoComplete数据
+            if (mListener != null) {
+                mListener.onQueryTextChange(value);
+            }
         }
 
+        /**
+         * 修改后的文字
+         */
         @Override
         public void afterTextChanged(Editable editable) {
+            //Log.i(TAG, "afterTextChanged===" + editable.toString());
         }
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.imb_search_clear) {
-            etInput.setText("");
+            etInput.setText(STRING_EMPTY);
             if (mListener != null) {
-                mListener.onQueryTextChange("");
+                mListener.onQueryTextChange(STRING_EMPTY);
             }
             ivDelete.setVisibility(GONE);
         }
@@ -102,7 +129,7 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
     /**
      * search view回调方法
      */
-    public interface onSearchViewListener {
-        boolean onQueryTextChange(String text);
+    public interface OnSearchViewListener {
+        void onQueryTextChange(String text);
     }
 }  

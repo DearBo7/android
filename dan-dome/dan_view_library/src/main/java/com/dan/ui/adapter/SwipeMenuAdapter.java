@@ -137,15 +137,12 @@ public abstract class SwipeMenuAdapter<T> extends BaseAdapter implements SwipeMe
 
     @Override
     public void setData(List<T> collection) {
-        if (collection == null) {
-            this.mList.clear();
-            return;
+        if (this.mList == null) {
+            this.mList = collection;
         } else {
-            if (this.mList != null) {
-                this.mList.clear();
+            this.mList.clear();
+            if (collection != null) {
                 this.mList.addAll(collection);
-            } else {
-                this.mList = collection;
             }
         }
         notifyDataChanged();

@@ -2,11 +2,10 @@ package com.dan.dome;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.WindowManager;
 
 import com.dan.dome.activity.LoginActivity;
+import com.dan.library.util.StatusBarUtils;
 
 /**
  * Created by Dan on 2019/1/17 15:30
@@ -16,22 +15,13 @@ public class SplashActivity extends AppCompatActivity {
 
     //两秒后进入系统
     private final int SPLASH_DISPLAY_TIME = 2000;
-    private boolean testFlag = true;
+    private boolean testFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //隐藏UI
-        try {
-            ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.hide();
-            }
-        } catch (Exception e) {
-
-        }
-        //设置全屏
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //设置状态栏全屏
+        StatusBarUtils.setWindowFullScreen(this);
 
         setContentView(R.layout.activity_splash);
         //停留2秒然后进主页面
