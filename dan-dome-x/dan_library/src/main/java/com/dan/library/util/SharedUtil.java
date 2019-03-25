@@ -1,12 +1,13 @@
-package com.dan.dome.service;
+package com.dan.library.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * Created by Dan on 2018/10/18 11:17
+ * Created by Dan on 2019/1/16 18:07
  */
-public class LoginService {
+public class SharedUtil {
 
     private static final String FileKey = "user_login";
 
@@ -14,11 +15,12 @@ public class LoginService {
 
     private SharedPreferences sharedPreferences;
 
-    public LoginService(Context context) {
+    public SharedUtil(Context context) {
         this(context, FileKey);
     }
 
-    public LoginService(Context context, String fileKey) {
+    @SuppressLint("CommitPrefEdits")
+    public SharedUtil(Context context, String fileKey) {
         this.sharedPreferences = context.getSharedPreferences(fileKey, Context.MODE_PRIVATE);
         this.edit = this.sharedPreferences.edit();
     }
@@ -35,7 +37,7 @@ public class LoginService {
         return sharedPreferences.getString(key, null);
     }
 
-    public boolean saveUser(String key, Object param) {
+    public boolean save(String key, Object param) {
         if (param instanceof Integer) {
             return edit.putInt(key, Integer.parseInt(String.valueOf(param))).commit();
         } else if (param instanceof Double) {
@@ -50,11 +52,11 @@ public class LoginService {
         return edit.putString(key, String.valueOf(param)).commit();
     }
 
-    public boolean deleteUser(String key) {
+    public boolean delete(String key) {
         return edit.remove(key).commit();
     }
 
-    public boolean clearUser() {
+    public boolean clear() {
 
         return edit.clear().commit();
     }
