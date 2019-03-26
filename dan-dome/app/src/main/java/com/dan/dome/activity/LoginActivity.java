@@ -10,47 +10,53 @@ import android.widget.EditText;
 
 import com.dan.dome.MainActivity;
 import com.dan.dome.R;
-import com.dan.dome.activity.base.BaseFinalActivity;
+import com.dan.dome.activity.base.BaseActivity;
 import com.dan.dome.config.HttpConfig;
 import com.dan.dome.enums.LoginKeyEnum;
-import com.dan.dome.service.LoginService;
 import com.dan.dome.util.SystemApplication;
 import com.dan.library.config.HttpStatusCode;
 import com.dan.library.util.AjaxResult;
 import com.dan.library.util.JsonUtil;
+import com.dan.library.util.SharedUtil;
 import com.dan.library.util.StatusBarUtils;
 import com.dan.library.util.ToastUtil;
-
-import net.tsz.afinal.FinalHttp;
-import net.tsz.afinal.annotation.view.ViewInject;
-import net.tsz.afinal.http.AjaxCallBack;
-import net.tsz.afinal.http.AjaxParams;
+import com.zhouyou.http.EasyHttp;
+import com.zhouyou.http.callback.SimpleCallBack;
+import com.zhouyou.http.exception.ApiException;
+import com.zhouyou.http.model.HttpParams;
 
 import org.apache.commons.lang3.StringUtils;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Dan on 2018/10/17 12:00
  */
-public class LoginActivity extends BaseFinalActivity {
+public class LoginActivity extends BaseActivity {
 
-    @ViewInject(id = R.id.btn_login_submit, click = "btnLoginClick")
+    @BindView(R.id.btn_login_submit)
     Button btnSubmit;
-    @ViewInject(id = R.id.et_login_username)
+
+    @BindView(R.id.et_login_username)
     EditText etUserName;
-    @ViewInject(id = R.id.et_login_pwd)
+
+    @BindView(R.id.et_login_pwd)
     EditText etPwd;
+
     /**
      * 是否记住密码
      */
-    @ViewInject(id = R.id.cb_login_remember_pwd)
+    @BindView(R.id.cb_login_remember_pwd)
     CheckBox cbRememberPwd;
+
     /**
      * 是否自动登录
      */
-    @ViewInject(id = R.id.cb_login_auto_login)
+    @BindView(R.id.cb_login_auto_login)
     CheckBox cbAutoLogin;
 
-    private LoginService loginService;
+    private SharedUtil sharedUtil;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,13 +64,13 @@ public class LoginActivity extends BaseFinalActivity {
         //设置状态栏透明
         StatusBarUtils.setWindowStatusBarColor(this);
         setContentView(R.layout.login_activity);
-        loginService = new LoginService(LoginActivity.this);
-        String account = loginService.getStringValue(LoginKeyEnum.USER_NAME.key);
-        String password = loginService.getStringValue(LoginKeyEnum.PWD.key);
+        sharedUtil = new SharedUtil(LoginActivity.this);
+        String account = sharedUtil.getStringValue(LoginKeyEnum.USER_NAME.key);
+        String password = sharedUtil.getStringValue(LoginKeyEnum.PWD.key);
         //自动登录
-        Boolean autoLoginFlag = loginService.getBooleanValue(LoginKeyEnum.AUTO_LOGIN.key);
+        Boolean autoLoginFlag = sharedUtil.getBooleanValue(LoginKeyEnum.AUTO_LOGIN.key);
         //记住密码
-        Boolean rememberPwdFlag = loginService.getBooleanValue(LoginKeyEnum.REMEMBER_PWD.key);
+        Boolean rememberPwdFlag = sharedUtil.getBooleanValue(LoginKeyEnum.REMEMBER_PWD.key);
         if (rememberPwdFlag || autoLoginFlag) {
             etUserName.setText(account);
             etPwd.setText(password);
@@ -79,6 +85,7 @@ public class LoginActivity extends BaseFinalActivity {
     /**
      * 点击登录
      */
+    @OnClick(R.id.btn_login_submit)
     public void btnLoginClick(View v) {
         final String account = etUserName.getText().toString();
         final String password = etPwd.getText().toString();
@@ -96,65 +103,64 @@ public class LoginActivity extends BaseFinalActivity {
     }
 
     private void login(final String account, final String password) {
-        final AjaxParams params = new AjaxParams();
+        HttpParams params = new HttpParams();
         params.put("account", account);
         params.put("password", password);
-        final FinalHttp http = new FinalHttp();
-        try {
-            http.post(HttpConfig.getLoginUrl(), params, new AjaxCallBack<String>() {
-
-                @Override
-                public void onSuccess(String json) {
-                    btnSubmit.setBackgroundResource(android.R.color.holo_purple);
-                    btnSubmit.setText("登录");
-                    btnSubmit.setEnabled(true);
-                    mLoading.dismiss();
-                    AjaxResult result = JsonUtil.fromJson(json, AjaxResult.class);
-                    if (result != null && result.getCode().equals(1)) {
-                        if (cbRememberPwd.isChecked() || cbAutoLogin.isChecked()) {
-                            loginService.saveUser(LoginKeyEnum.USER_NAME.key, account);
-                            loginService.saveUser(LoginKeyEnum.PWD.key, password);
+        EasyHttp.post(HttpConfig.getLoginUrl())
+                .params(params)
+                .execute(new SimpleCallBack<String>() {
+                    @Override
+                    public void onError(ApiException e) {
+                        mLoading.dismiss();
+                        if (e.getCode() >= ApiException.UNKNOWN) {
+                            ToastUtil.makeText(LoginActivity.this, e.getMessage());
                         } else {
-                            loginService.deleteUser(LoginKeyEnum.USER_NAME.key);
-                            loginService.deleteUser(LoginKeyEnum.PWD.key);
+                            ToastUtil.makeText(LoginActivity.this, HttpStatusCode.getHttpStatusMsg(e.getCode()));
                         }
-                        loginService.saveUser(LoginKeyEnum.REMEMBER_PWD.key, cbRememberPwd.isChecked());
-                        loginService.saveUser(LoginKeyEnum.AUTO_LOGIN.key, cbAutoLogin.isChecked());
-                        SystemApplication.setDataToken(result.getData().toString());
-                        SystemApplication.setUserAccount(account);
-                        SystemApplication.setUserPassword(password);
-                        ToastUtil.makeText(LoginActivity.this, "登录成功!" + JsonUtil.toJson(result));
-                        //跳转
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        ToastUtil.makeText(LoginActivity.this, result.getMsg() == null ? "登录失败!" : result.getMsg());
+                        btnSubmit.setBackgroundResource(android.R.color.holo_blue_dark);
+                        btnSubmit.setEnabled(true);
+                        btnSubmit.setText("登录");
                     }
-                }
 
-                @Override
-                public void onFailure(Throwable t, int errorNo, String strMsg) {
-                    mLoading.dismiss();
-                    System.out.println("errorNo:" + errorNo + ",strMsg:" + strMsg + ",Throwable:" + t);
-                    ToastUtil.makeText(LoginActivity.this, HttpStatusCode.getHttpStatusMsg(errorNo));
-                    btnSubmit.setBackgroundResource(android.R.color.holo_blue_dark);
-                    btnSubmit.setEnabled(true);
-                    btnSubmit.setText("登录");
-                }
+                    @Override
+                    public void onSuccess(String json) {
+                        btnSubmit.setBackgroundResource(android.R.color.holo_purple);
+                        btnSubmit.setText("登录");
+                        btnSubmit.setEnabled(true);
+                        mLoading.dismiss();
+                        AjaxResult result = JsonUtil.fromJson(json, AjaxResult.class);
+                        if (result != null && result.getCode().equals(1)) {
+                            if (cbRememberPwd.isChecked() || cbAutoLogin.isChecked()) {
+                                sharedUtil.save(LoginKeyEnum.USER_NAME.key, account);
+                                sharedUtil.save(LoginKeyEnum.PWD.key, password);
+                            } else {
+                                sharedUtil.delete(LoginKeyEnum.USER_NAME.key);
+                                sharedUtil.delete(LoginKeyEnum.PWD.key);
+                            }
+                            sharedUtil.save(LoginKeyEnum.REMEMBER_PWD.key, cbRememberPwd.isChecked());
+                            sharedUtil.save(LoginKeyEnum.AUTO_LOGIN.key, cbAutoLogin.isChecked());
+                            SystemApplication.setDataToken(result.getData().toString());
+                            SystemApplication.setUserAccount(account);
+                            SystemApplication.setUserPassword(password);
+                            ToastUtil.makeText(LoginActivity.this, "登录成功!" + JsonUtil.toJson(result));
+                            //跳转
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            ToastUtil.makeText(LoginActivity.this, result.getMsg() == null ? "登录失败!" : result.getMsg());
+                        }
+                    }
 
-                @Override
-                public void onStart() {
-                    mLoading.show();
-                    btnSubmit.setBackgroundResource(android.R.color.darker_gray);
-                    btnSubmit.setEnabled(false);
-                    btnSubmit.setText("登录中...");
-                    //睡眠一秒钟
-                    //SystemClock.sleep(1000 * 2);
-                }
-            });
-        } catch (Exception e) {
-            ToastUtil.makeText(LoginActivity.this, "登录错误!" + e.getMessage());
-        }
+                    @Override
+                    public void onStart() {
+                        mLoading.show();
+                        btnSubmit.setBackgroundResource(android.R.color.darker_gray);
+                        btnSubmit.setEnabled(false);
+                        btnSubmit.setText("登录中...");
+                        //睡眠一秒钟
+                        //SystemClock.sleep(1000 * 2);
+                    }
+                });
     }
 }

@@ -30,37 +30,47 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+
 /**
  * Created by Dan on 2019/2/19 14:08
  */
 public class OtherFragment extends BaseFragment {
     private static final String TAG = "OtherFragment";
     //下拉列表
-    private NiceSpinner niceSpinner;
+    @BindView(R.id.nice_spinner)
+    NiceSpinner niceSpinner;
 
     //ExpandTabView 点击按首字母筛选
-    private ExpandTabView expandTabView;
+    @BindView(R.id.etv_list)
+    ExpandTabView expandTabView;
+
     private List<View> mViewArray = new ArrayList<View>();
     private ViewMiddle viewMiddle;
     private Map<String, List<Material>> mapList = new LinkedHashMap<>();
 
     //弹框搜索
+    @BindView(R.id.btn_open_search_dialog)
     Button btnOpenSearchDialog;
-    private TextView textSearchResultView;
+
+    @BindView(R.id.tv_search_result)
+    TextView textSearchResultView;
+
     private List<City> mDataList;
     private SearchSelectDialog searchSelectDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.other_fragment, null);
+        super.initCreateView(view);
         initView(view);
         initListener();
         return view;
     }
 
     private void initView(View view) {
-        niceSpinner = view.findViewById(R.id.nice_spinner);
-        expandTabView = view.findViewById(R.id.etv_list);
+        //niceSpinner = view.findViewById(R.id.nice_spinner);
+        //expandTabView = view.findViewById(R.id.etv_list);
 
         viewMiddle = new ViewMiddle(getContext());
         mViewArray.add(viewMiddle);
@@ -82,8 +92,8 @@ public class OtherFragment extends BaseFragment {
         });
 
         //弹出搜索
-        btnOpenSearchDialog = view.findViewById(R.id.btn_open_search_dialog);
-        textSearchResultView = view.findViewById(R.id.tv_search_result);
+        //btnOpenSearchDialog = view.findViewById(R.id.btn_open_search_dialog);
+        //textSearchResultView = view.findViewById(R.id.tv_search_result);
         setData();
         createSearchSelectDialog();
         //设置数据

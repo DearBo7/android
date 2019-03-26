@@ -17,6 +17,7 @@ public class OtherListFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.other_list_fragment, null);
+        super.initCreateView(view);
         initView(view);
         initListener();
         return view;

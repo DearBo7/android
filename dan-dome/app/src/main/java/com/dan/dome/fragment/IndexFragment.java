@@ -8,17 +8,19 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.dan.dome.R;
-import com.dan.ui.adapter.SwipeMenuAdapter;
-import com.dan.ui.adapter.SwipeMenuViewHolder;
 import com.dan.dome.entity.Material;
 import com.dan.dome.fragment.base.BaseFragment;
-import com.dan.ui.widget.swipelist.SwipeMenuLayout;
 import com.dan.library.util.JsonUtil;
 import com.dan.library.util.ToastUtil;
+import com.dan.ui.adapter.SwipeMenuAdapter;
+import com.dan.ui.adapter.SwipeMenuViewHolder;
+import com.dan.ui.widget.swipelist.SwipeMenuLayout;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * Created by Dan on 2019/2/19 14:08
@@ -26,21 +28,26 @@ import java.util.List;
 public class IndexFragment extends BaseFragment {
 
     private static final String TAG = "IndexFragment";
-    private ListView listView;
+
+    @BindView(R.id.li_listView)
+    ListView listView;
+
     private List<Material> materialList = new ArrayList<>();
+
     private Integer dataSize = 100;
+
     private SwipeMenuAdapter<Material> materialSwipeMenuAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_index, null);
+        super.initCreateView(view);
         initView(view);
-
         return view;
     }
 
     private void initView(View view) {
-        listView = view.findViewById(R.id.li_listView);
+        //listView = view.findViewById(R.id.li_listView);
         listView.setAdapter(materialSwipeMenuAdapter = new SwipeMenuAdapter<Material>(getContext(), R.layout.item_cst_swipe) {
             @Override
             public void onBindViewHolder(SwipeMenuViewHolder holder, Material model, int position) {

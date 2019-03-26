@@ -45,7 +45,6 @@ public abstract class BaseFragment extends Fragment {
         if (unbinder != null) {
             unbinder.unbind();
             unbinder = null;
-            System.out.println("===BaseFragment===onDestroyView=unbinder==1===");
         }
         super.onDestroyView();
     }

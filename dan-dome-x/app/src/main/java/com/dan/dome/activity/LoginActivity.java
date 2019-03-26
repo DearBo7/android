@@ -43,11 +43,13 @@ public class LoginActivity extends BaseActivity {
 
     @BindView(R.id.et_login_pwd)
     EditText etPwd;
+
     /**
      * 是否记住密码
      */
     @BindView(R.id.cb_login_remember_pwd)
     CheckBox cbRememberPwd;
+
     /**
      * 是否自动登录
      */

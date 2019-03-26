@@ -19,44 +19,46 @@ import com.dan.dome.entity.User;
 import com.dan.dome.fragment.IndexFragment;
 import com.dan.dome.fragment.MyFragment;
 import com.dan.dome.fragment.OtherFragment;
+import com.dan.dome.fragment.OtherListFragment;
 import com.dan.dome.fragment.base.BaseFragmentActivity;
 import com.dan.dome.util.SystemApplication;
 import com.dan.library.customview.ConfirmDialog;
 import com.dan.library.util.AjaxResult;
 import com.dan.library.util.JsonUtil;
 import com.dan.library.util.NetworkUtil;
-
-import net.tsz.afinal.FinalHttp;
-import net.tsz.afinal.http.AjaxCallBack;
-import net.tsz.afinal.http.AjaxParams;
+import com.zhouyou.http.EasyHttp;
+import com.zhouyou.http.callback.SimpleCallBack;
+import com.zhouyou.http.exception.ApiException;
 
 import org.apache.commons.lang3.StringUtils;
 
+import butterknife.BindView;
+
 public class MainActivity extends BaseFragmentActivity {
 
+    @BindView(R.id.tx_title)
     public TextView tvMainTitle;
 
-    private FrameLayout mvp;
+    @BindView(R.id.mvp)
+    FrameLayout mvp;
 
-    private RadioGroup rg_home;
+    @BindView(R.id.rg_home)
+    RadioGroup rg_home;
 
     private FragmentManager fManager;
 
-    private Fragment indexFragment, otherFragment, myFragment;
+    private Fragment indexFragment, otherFragment, otherListFragment, myFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (!NetworkUtil.isNetworkAvailable(MainActivity.this)) {
-            new ConfirmDialog(getApplicationContext(), "你沒有开启数据连接！", "是否对网络进行设置？", "是", "否", new ConfirmDialog.Callback() {
-                @Override
-                public void callback(int position) {
-                    if (position == 1) {
-                        // 如果在设置完成后需要再次进行操作，可以重写操作代码，在这里不再重写
-                        Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
-                        startActivity(intent);
-                    }
+            new ConfirmDialog(getApplicationContext(), "你沒有开启数据连接！", "是否对网络进行设置？", "是", "否", position -> {
+                if (position == 1) {
+                    // 如果在设置完成后需要再次进行操作，可以重写操作代码，在这里不再重写
+                    Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                    startActivity(intent);
                 }
             });
         }
@@ -66,9 +68,9 @@ public class MainActivity extends BaseFragmentActivity {
     }
 
     private void initFragment() {
-        tvMainTitle = findViewById(R.id.tx_title);
-        mvp = findViewById(R.id.mvp);
-        rg_home = findViewById(R.id.rg_home);
+        //tvMainTitle = findViewById(R.id.tx_title);
+        //mvp = findViewById(R.id.mvp);
+        //rg_home = findViewById(R.id.rg_home);
 
         //设置数据
         setData();
@@ -95,6 +97,14 @@ public class MainActivity extends BaseFragmentActivity {
                         transaction.add(R.id.mvp, otherFragment);
                     } else {
                         transaction.show(otherFragment);
+                    }
+                    break;
+                case R.id.rb_other_list:
+                    if (otherListFragment == null) {
+                        otherListFragment = new OtherListFragment();
+                        transaction.add(R.id.mvp, otherListFragment);
+                    } else {
+                        transaction.show(otherListFragment);
                     }
                     break;
                 case R.id.rb_my:
@@ -132,9 +142,11 @@ public class MainActivity extends BaseFragmentActivity {
 
     //隐藏所有Fragment
     private void hideAllFragment(FragmentTransaction fragmentTransaction) {
-
         if (indexFragment != null) {
             fragmentTransaction.hide(indexFragment);
+        }
+        if (otherListFragment != null) {
+            fragmentTransaction.hide(otherListFragment);
         }
         if (otherFragment != null) {
             fragmentTransaction.hide(otherFragment);
@@ -162,20 +174,23 @@ public class MainActivity extends BaseFragmentActivity {
     }
 
     private void getUser(String dataToken) {
-        FinalHttp http = new FinalHttp();
-        AjaxParams params = new AjaxParams();
-        params.put("oauth", dataToken);
-        http.get(HttpConfig.getUser(), params, new AjaxCallBack<String>() {
-            @Override
-            public void onSuccess(String json) {
-                AjaxResult result = JsonUtil.fromJson(json, AjaxResult.class);
-                if (result != null && result.getCode().equals(1) && StringUtils.isNoneBlank(result.getData().toString())) {
-                    String toJson = JsonUtil.toJson(result.getData());
-                    SystemApplication.user = JsonUtil.fromJson(toJson, User.class);
-                } else {
-                    SystemApplication.user = new User();
-                }
-            }
-        });
+        EasyHttp.get(HttpConfig.getUser())
+                .params("oauth", dataToken)
+                .execute(new SimpleCallBack<String>() {
+                    @Override
+                    public void onError(ApiException e) {
+                    }
+
+                    @Override
+                    public void onSuccess(String json) {
+                        AjaxResult result = JsonUtil.fromJson(json, AjaxResult.class);
+                        if (result != null && result.getCode().equals(1) && StringUtils.isNoneBlank(result.getData().toString())) {
+                            String toJson = JsonUtil.toJson(result.getData());
+                            SystemApplication.user = JsonUtil.fromJson(toJson, User.class);
+                        } else {
+                            SystemApplication.user = new User();
+                        }
+                    }
+                });
     }
 }
