@@ -16,15 +16,28 @@ public class ToastUtil {
     }
 
     public static void makeText(Context context, String msg, int duration) {
+        Toast mToast = null;
         try {
-            Toast.makeText(context, msg, duration).show();
+            if (null == mToast) {
+                mToast = Toast.makeText(context, "", duration);
+            }
+            mToast.setText(msg);
+            mToast.show();
+            //Toast.makeText(context, msg, duration).show();
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
-            e.printStackTrace();
-            //解决在子线程中调用Toast的异常情况处理
-            Looper.prepare();
-            Toast.makeText(context, msg, duration).show();
-            Looper.loop();
+            Log.e(TAG, "makeText:", e);
+            try {
+                //解决在子线程中调用Toast的异常情况处理
+                Looper.prepare();
+                if (null == mToast) {
+                    mToast = Toast.makeText(context, "", duration);
+                }
+                mToast.setText(msg);
+                mToast.show();
+                Looper.loop();
+            } catch (Exception e1) {
+                Log.e(TAG, "makeText-Looper.prepare:", e1);
+            }
         }
     }
 }
