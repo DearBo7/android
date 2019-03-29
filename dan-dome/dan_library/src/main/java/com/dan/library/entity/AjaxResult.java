@@ -1,4 +1,6 @@
-package com.dan.library.util;
+package com.dan.library.entity;
+
+import com.dan.library.util.JsonUtil;
 
 import java.io.Serializable;
 

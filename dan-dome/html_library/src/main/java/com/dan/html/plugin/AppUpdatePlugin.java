@@ -15,7 +15,7 @@ import com.dan.html.util.JSUtils;
 import com.dan.library.appupdate.model.UpdateBean;
 import com.dan.library.appupdate.util.DownloadAppUtils;
 import com.dan.library.customview.ConfirmDialog;
-import com.dan.library.util.AjaxResult;
+import com.dan.library.entity.AjaxResult;
 import com.dan.library.util.JsonUtil;
 import com.dan.library.util.PermissionsUtil;
 import com.dan.library.util.ToastUtil;

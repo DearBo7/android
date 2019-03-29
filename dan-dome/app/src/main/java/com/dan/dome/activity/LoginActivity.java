@@ -15,7 +15,7 @@ import com.dan.dome.config.HttpConfig;
 import com.dan.dome.enums.LoginKeyEnum;
 import com.dan.dome.util.SystemApplication;
 import com.dan.library.config.HttpStatusCode;
-import com.dan.library.util.AjaxResult;
+import com.dan.library.entity.AjaxResult;
 import com.dan.library.util.JsonUtil;
 import com.dan.library.util.SharedUtil;
 import com.dan.library.util.StatusBarUtils;

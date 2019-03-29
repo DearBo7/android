@@ -1,6 +1,6 @@
 package com.dan.html.util;
 
-import com.dan.library.util.AjaxResult;
+import com.dan.library.entity.AjaxResult;
 import com.dan.library.util.JsonUtil;
 
 import io.dcloud.common.DHInterface.IWebview;

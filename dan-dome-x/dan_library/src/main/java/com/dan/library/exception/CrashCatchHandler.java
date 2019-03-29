@@ -134,7 +134,8 @@ public class CrashCatchHandler implements Thread.UncaughtExceptionHandler {
     public void uncaughtException(Thread t, Throwable e) {
         //写入本地日志
         writeToFile(e);
-
+        //退出Jvm,释放所占内存资源，0表示正常退出
+        System.exit(0);
         //杀死这个进程避免类似ios直接退出。
         android.os.Process.killProcess(android.os.Process.myPid());
     }

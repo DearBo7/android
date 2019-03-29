@@ -23,7 +23,7 @@ import com.dan.dome.fragment.OtherListFragment;
 import com.dan.dome.fragment.base.BaseFragmentActivity;
 import com.dan.dome.util.SystemApplication;
 import com.dan.library.customview.ConfirmDialog;
-import com.dan.library.util.AjaxResult;
+import com.dan.library.entity.AjaxResult;
 import com.dan.library.util.JsonUtil;
 import com.dan.library.util.NetworkUtil;
 import com.zhouyou.http.EasyHttp;
@@ -166,7 +166,10 @@ public class MainActivity extends BaseFragmentActivity {
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();
+                //退出Jvm,释放所占内存资源，0表示正常退出
                 System.exit(0);
+                //杀死这个进程避免类似ios直接退出。
+                android.os.Process.killProcess(android.os.Process.myPid());
             }
             return true;
         }
