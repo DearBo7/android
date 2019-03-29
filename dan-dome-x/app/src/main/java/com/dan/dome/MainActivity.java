@@ -12,7 +12,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dan.dome.config.HttpConfig;
+import com.dan.dome.networks.HttpConfig;
 import com.dan.dome.entity.User;
 import com.dan.dome.fragment.IndexFragment;
 import com.dan.dome.fragment.MyFragment;

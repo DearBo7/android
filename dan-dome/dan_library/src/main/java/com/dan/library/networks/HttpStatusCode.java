@@ -1,4 +1,4 @@
-package com.dan.library.config;
+package com.dan.library.networks;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

@@ -1,4 +1,4 @@
-package com.dan.dome.config;
+package com.dan.dome.networks;
 
 import com.dan.dome.util.SystemApplication;
 
