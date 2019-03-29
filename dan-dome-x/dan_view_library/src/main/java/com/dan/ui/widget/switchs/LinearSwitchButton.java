@@ -55,9 +55,8 @@ public class LinearSwitchButton<T> extends LinearLayout {
      */
     private List<T> groupLeftList = new ArrayList<>();
 
-    private int lastRegionIndex = -1;
-    private int lastPlateIndex = -1;
-    private String showString;
+    private int lastLeftRegionIndex = -1;
+    private int lastRightPlateIndex = -1;
     private T selectItem;
 
     private OnSelectListener mOnSelectListener;
@@ -92,7 +91,8 @@ public class LinearSwitchButton<T> extends LinearLayout {
         regionListViewAdapterLeft.setOnItemClickListener(new SimpleTextAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, String selectedText, Object o) {
-                lastRegionIndex = position;
+                lastLeftRegionIndex = position;
+                selectItem = groupLeftList.get(position);
                 if (null != mOnSelectListener) {
                     mOnSelectListener.onLeftItemClick(o, position, mAutoWrapLineLayoutRight);
                 }
@@ -123,7 +123,7 @@ public class LinearSwitchButton<T> extends LinearLayout {
         regionListViewAdapterLeft.setOnItemClickListener(new SimpleTextAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, String selectedText, Object o) {
-                lastRegionIndex = position;
+                lastLeftRegionIndex = position;
                 if (groupMap.containsKey(selectedText)) {
                     childrenItem.clear();
                     childrenItem.addAll(groupMap.get(selectedText));
@@ -141,6 +141,9 @@ public class LinearSwitchButton<T> extends LinearLayout {
         setRegionAdapterLeft(regionListViewAdapterLeft);
     }
 
+    /**
+     * 设置左边数据源,创建
+     */
     public void setDataSourceLeft(List<T> groupLeft) {
         if (groupLeft == null) {
             return;
@@ -158,11 +161,22 @@ public class LinearSwitchButton<T> extends LinearLayout {
         }
     }
 
+    /**
+     * 设置左边内容,并清空右边内容
+     *
+     * @param groupLeft 内容
+     */
     public void setDataSourceLeftOrUpdate(List<T> groupLeft) {
 
         setDataSourceLeftOrUpdate(groupLeft, true);
     }
 
+    /**
+     * 设置左边内容
+     *
+     * @param groupLeft      内容
+     * @param rightClearFlag 是否清空右边数据
+     */
     public void setDataSourceLeftOrUpdate(List<T> groupLeft, boolean rightClearFlag) {
         if (groupLeft == null) {
             return;
@@ -183,6 +197,45 @@ public class LinearSwitchButton<T> extends LinearLayout {
             //清空右边数据
             mAutoWrapLineLayoutRight.removeAllViews();
         }
+    }
+
+    /**
+     * 设置左边选中,并且获取值
+     *
+     * @param regionIndex 左边下标
+     */
+    public T setDefaultSelectAndValueLeftBean(int regionIndex) {
+        if (groupLeftList != null && regionIndex > -1 && regionIndex < groupLeftList.size()) {
+            mListViewLeft.setSelection(regionIndex);
+            lastLeftRegionIndex = regionIndex;
+            selectItem = groupLeftList.get(lastLeftRegionIndex);
+            if (null != regionListViewAdapterLeft) {
+                regionListViewAdapterLeft.setSelectedPositionNoNotify(regionIndex);
+            }
+            return selectItem;
+        }
+        return null;
+    }
+
+    /**
+     * 获取右边view
+     */
+    public AutoWrapLineLayout getAutoWrapLineLayoutRight() {
+        return mAutoWrapLineLayoutRight;
+    }
+
+    /**
+     * 获取选择的那项
+     */
+    public T getSelectLeftItem() {
+        return selectItem;
+    }
+
+    /**
+     * 获取选中的下标
+     */
+    public int getSelectLeftRegionIndex() {
+        return lastLeftRegionIndex;
     }
 
     public void setSpinnerTextFormatterLeft(SpinnerTextFormatter formatter) {
