@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">第一个App</string>
+    <string name="text_title">测试测试测试</string>
+    <string name="btn_call_name">按钮呀</string>
+</resources>

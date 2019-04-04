@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">发送短信</string>
+    <string name="sms_btn_send">发送</string>
+</resources>
