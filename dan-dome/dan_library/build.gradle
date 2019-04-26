@@ -31,4 +31,7 @@ dependencies {
     compileOnly 'com.azhon:appupdate:2.0.0'
     api 'org.apache.commons:commons-lang3:3.8'
     api 'com.google.code.gson:gson:2.8.2'
+    //工具类
+    api 'com.github.xuexiangjys.XUtil:xutil-core:1.1.5'
+    //api 'com.github.xuexiangjys.XUtil:xutil-sub:1.1.5'
 }

@@ -64,4 +64,7 @@ dependencies {
 
     //开关控件 https://github.com/zcweng/SwitchButton implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     //元素自动换行 https://github.com/Hector1990/AutoWrapLineLayoutDemo  implementation 'cn.wolfspider:autowraplinelayout:1.0.1'
+    //工具类
+    //implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.5'
+    //implementation 'com.github.xuexiangjys.XUtil:xutil-sub:1.1.5'
 }

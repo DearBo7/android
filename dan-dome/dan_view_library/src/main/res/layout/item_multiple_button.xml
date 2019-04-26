@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
-    android:background="@drawable/choosearea_bg_mid"
+    android:background="@drawable/etv_expand_bg_mid"
     android:orientation="horizontal">
 
     <ListView

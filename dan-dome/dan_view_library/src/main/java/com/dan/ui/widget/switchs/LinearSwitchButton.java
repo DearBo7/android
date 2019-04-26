@@ -77,14 +77,14 @@ public class LinearSwitchButton<T> extends LinearLayout {
         inflater.inflate(R.layout.item_multiple_button, this, true);
         mListViewLeft = findViewById(R.id.listViewLeft);
         mAutoWrapLineLayoutRight = findViewById(R.id.fl_Right);
-        setBackground(getResources().getDrawable(R.drawable.choosearea_bg_left));
+        setBackground(getResources().getDrawable(R.drawable.linear_switch_bg_left));
     }
 
     /**
      * 创建左边默认的构造
      */
     private void defaultCreateRegionListViewAdapterLeft() {
-        regionListViewAdapterLeft = new SimpleTextAdapter(context, groupLeftList, R.drawable.choose_item_selected, R.drawable.item_etv_choose_ear_selector);
+        regionListViewAdapterLeft = new SimpleTextAdapter(context, groupLeftList, R.drawable.linear_switch_item_selected, R.drawable.item_etv_choose_ear_selector);
         regionListViewAdapterLeft.setTextSize(16);
         regionListViewAdapterLeft.setTextFormatter(regionSpinnerTextFormatterLeft);
 
@@ -116,7 +116,7 @@ public class LinearSwitchButton<T> extends LinearLayout {
         groupMap.putAll(groupMapValue);
         groupList.addAll(new LinkedList<String>(groupMap.keySet()));
 
-        regionListViewAdapterLeft = new SimpleTextAdapter(context, groupList, R.drawable.choose_item_selected, com.dan.ui.R.drawable.item_etv_choose_ear_selector);
+        regionListViewAdapterLeft = new SimpleTextAdapter(context, groupList, R.drawable.linear_switch_item_selected, com.dan.ui.R.drawable.item_etv_choose_ear_selector);
         regionListViewAdapterLeft.setTextSize(16);
         regionListViewAdapterLeft.setTextFormatter(regionSpinnerTextFormatterLeft);
 

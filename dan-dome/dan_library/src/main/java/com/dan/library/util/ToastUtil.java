@@ -8,6 +8,7 @@ import android.widget.Toast;
 /**
  * Created by Dan on 2018/10/17 15:07
  */
+@Deprecated
 public class ToastUtil {
     private static final String TAG = "ToastUtil";
 
