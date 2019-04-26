@@ -9,8 +9,8 @@ import android.widget.ListView;
 
 import com.dan.ui.R;
 import com.dan.ui.adapter.SimpleSpinnerTextFormatter;
-import com.dan.ui.adapter.impl.SpinnerTextFormatter;
 import com.dan.ui.adapter.SimpleTextAdapter;
+import com.dan.ui.adapter.impl.SpinnerTextFormatter;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -71,7 +71,7 @@ public class ViewMiddle<T> extends LinearLayout implements ViewBaseAction {
         inflater.inflate(R.layout.etv_view_region, this, true);
         regionListView = findViewById(R.id.listView);
         plateListView = findViewById(R.id.listView2);
-        setBackground(getResources().getDrawable(R.drawable.choosearea_bg_left));
+        setBackground(getResources().getDrawable(R.drawable.etv_expand_bg_left));
 
     }
 
@@ -141,7 +141,7 @@ public class ViewMiddle<T> extends LinearLayout implements ViewBaseAction {
         groupMap.putAll(groupMapValue);
         groupList.addAll(new LinkedList<String>(groupMap.keySet()));
 
-        regionListViewAdapter = new SimpleTextAdapter(context, groupList, R.drawable.choose_item_selected, R.drawable.item_etv_choose_ear_selector);
+        regionListViewAdapter = new SimpleTextAdapter(context, groupList, R.drawable.etv_expand_item_selected, R.drawable.item_etv_choose_ear_selector);
         regionListViewAdapter.setTextSize(16);
         regionListViewAdapter.setTextFormatter(regionSpinnerTextFormatter);
         //regionListViewAdapter.setSelectedPositionNoNotify(tEaraPosition);
@@ -162,7 +162,7 @@ public class ViewMiddle<T> extends LinearLayout implements ViewBaseAction {
             childrenItem.addAll(groupMap.get(groupList.get(tEaraPosition)));
         }*/
 
-        plateListViewAdapter = new SimpleTextAdapter(context, childrenItem, R.drawable.choose_item_right, R.drawable.item_etv_choose_plate_selector);
+        plateListViewAdapter = new SimpleTextAdapter(context, childrenItem, R.drawable.etv_expand_item_right, R.drawable.item_etv_choose_plate_selector);
         plateListViewAdapter.setTextSize(14);
         plateListViewAdapter.setTextFormatter(plateSpinnerTextFormatter);
         plateListViewAdapter.setOnItemClickListener(new SimpleTextAdapter.OnItemClickListener() {

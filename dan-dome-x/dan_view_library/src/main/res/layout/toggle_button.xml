@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
-    android:background="@drawable/etv_expand_tab_selector"
+    android:background="@drawable/etv_expand_tab_selector_bg"
     android:gravity="center"
     android:singleLine="true"
     android:text="ToggleButton"
