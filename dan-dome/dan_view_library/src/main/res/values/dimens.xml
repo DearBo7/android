@@ -5,5 +5,5 @@
     <!--etv-expand-height-->
     <dimen name="etv_expand_height">1dp</dimen>
     <dimen name="etv_expand_radius">10dp</dimen>
-    <dimen name="etv_expand_padding">5dp</dimen>
+    <dimen name="etv_expand_padding">4dp</dimen>
 </resources>
