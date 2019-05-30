@@ -20,10 +20,6 @@ import java.util.List;
 /**
  * Created by Dan on 2019/2/20 11:43
  */
-
-/**
- * Created by Dan on 2019/2/20 11:43
- */
 public class CrashCatchHandler implements Thread.UncaughtExceptionHandler {
 
     private static final String TAG = "CrashCatchHandler";
