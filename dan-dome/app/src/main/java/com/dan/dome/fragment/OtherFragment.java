@@ -15,11 +15,11 @@ import com.dan.dome.entity.City;
 import com.dan.dome.entity.Material;
 import com.dan.dome.fragment.base.BaseFragment;
 import com.dan.library.util.JsonUtil;
-import com.dan.library.util.ToastUtil;
 import com.dan.ui.adapter.SimpleSpinnerTextFormatter;
 import com.dan.ui.widget.grouplist.ExpandTabView;
 import com.dan.ui.widget.grouplist.ViewMiddle;
 import com.dan.ui.widget.searchselect.SearchSelectDialog;
+import com.xuexiang.xutil.tip.ToastUtils;
 
 import org.angmarch.views.NiceSpinner;
 import org.apache.commons.lang3.StringUtils;
@@ -111,7 +111,7 @@ public class OtherFragment extends BaseFragment {
                 if (o instanceof Material) {
                     Material material = (Material) o;
                     Log.i(TAG, "选择material:" + JsonUtil.toJson(material));
-                    ToastUtil.makeText(getContext(), "选择material:" + JsonUtil.toJson(material));
+                    ToastUtils.toast("选择material:" + JsonUtil.toJson(material));
                 }
             }
         });
@@ -140,7 +140,7 @@ public class OtherFragment extends BaseFragment {
             @Override
             public void onSelected(String showText, int position, Object t) {
                 textSearchResultView.setText(showText);
-                ToastUtil.makeText(getContext(), "showText:" + showText);
+                ToastUtils.toast("showText:" + showText);
                 Log.i(TAG, "showText:" + showText + ";t:" + JsonUtil.toJson(t));
             }
 
@@ -178,7 +178,7 @@ public class OtherFragment extends BaseFragment {
         //有数据时,取消禁用
         expandTabView.setToggleButton(true);
         Log.i(TAG, "设置默认选中:material:" + JsonUtil.toJson(material));
-        ToastUtil.makeText(getContext(), "设置默认选中:material:" + JsonUtil.toJson(material));
+        ToastUtils.toast("设置默认选中:material:" + JsonUtil.toJson(material));
         if (StringUtils.isNotBlank(viewMiddle.getShowText())) {
             expandTabView.setTitle(viewMiddle.getShowText(), 0);
         }

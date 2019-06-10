@@ -83,7 +83,7 @@ public class CrashCatchHandler implements Thread.UncaughtExceptionHandler {
     /**
      * 把错误日志写到文件中。
      */
-    private void writeToFile(Throwable ex) {
+    private void writeToSDCardFile(Throwable ex) {
         //判断SD卡不存在或无法使用
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             Log.e(TAG, "SD卡不存在日志无法写入!error:" + ex.getMessage());
@@ -154,10 +154,10 @@ public class CrashCatchHandler implements Thread.UncaughtExceptionHandler {
             ToastUtils.toast("很抱歉,程序出现异常,请重新打开!");
             //退出程序,finish所有的Activity
             ActivityUtil.getInstance().finishAll();
-            //退出Jvm,释放所占内存资源，0表示正常退出
-            System.exit(0);
             //杀死这个进程避免类似ios直接退出。
             android.os.Process.killProcess(android.os.Process.myPid());
+            //退出Jvm,释放所占内存资源，0表示正常退出，非0表示异常
+            System.exit(1);
         }
     }
 
@@ -172,7 +172,7 @@ public class CrashCatchHandler implements Thread.UncaughtExceptionHandler {
             return false;
         }
         //写入本地日志
-        writeToFile(ex);
+        writeToSDCardFile(ex);
         return true;
     }
 }

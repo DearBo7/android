@@ -4,6 +4,6 @@
     <dimen name="head_bar_height">45dp</dimen>
     <!--etv-expand-height-->
     <dimen name="etv_expand_height">1dp</dimen>
-    <dimen name="etv_expand_radius">10dp</dimen>
-    <dimen name="etv_expand_padding">4dp</dimen>
+    <dimen name="etv_expand_radius">3dp</dimen>
+    <dimen name="etv_expand_padding">3dp</dimen>
 </resources>

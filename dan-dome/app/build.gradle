@@ -67,4 +67,6 @@ dependencies {
     //工具类
     //implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.5'
     //implementation 'com.github.xuexiangjys.XUtil:xutil-sub:1.1.5'
+    //拍照、相册选择图片 https://github.com/crazycodeboy/TakePhoto
+    //implementation 'com.jph.takephoto:takephoto_library:4.1.0'
 }

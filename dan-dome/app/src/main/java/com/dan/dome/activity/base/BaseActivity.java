@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.WindowManager;
 
 import com.dan.dome.R;
+import com.dan.library.util.ActivityUtil;
 import com.dan.library.util.DialogUtils;
 import com.dan.library.util.StatusBarUtils;
 
@@ -25,11 +26,12 @@ public class BaseActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtils.setWindowStatusBarColor(this, R.color.head_background_back_all);
-        //ActivityCollector.addActivity(this);
+        ActivityUtil.getInstance().addActivity(this);
 
         mLoading = DialogUtils.createLoadingDialog(this);
         //软件盘自动打开
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        //dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     /**
@@ -49,7 +51,7 @@ public class BaseActivity extends Activity {
             unbinder.unbind();
             unbinder = null;
         }
-        //ActivityCollector.removeActivity(this);
+        ActivityUtil.getInstance().removeActivity(this);
     }
 
 }
