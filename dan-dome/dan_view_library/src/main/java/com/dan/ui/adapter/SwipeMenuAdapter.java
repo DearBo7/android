@@ -8,21 +8,23 @@ import android.widget.BaseAdapter;
 
 import com.dan.ui.adapter.impl.SwipeMenuDataAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Dan on 2019/2/25 15:08
  */
 public abstract class SwipeMenuAdapter<T> extends BaseAdapter implements SwipeMenuDataAdapter<T> {
-    protected Context mContext;
-    protected List<T> mList;
-    protected LayoutInflater mInflater;
+    private Context mContext;
+    private List<T> mList;
+    private LayoutInflater mInflater;
     private int layoutId;
 
     public SwipeMenuAdapter(Context context, int layoutId) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(context);
         this.layoutId = layoutId;
+        this.mList = new ArrayList<>();
     }
 
     public SwipeMenuAdapter(Context context, List<T> dataList, int layoutId) {
@@ -138,12 +140,13 @@ public abstract class SwipeMenuAdapter<T> extends BaseAdapter implements SwipeMe
     @Override
     public void setData(List<T> collection) {
         if (this.mList == null) {
-            this.mList = collection;
-        } else {
+            this.mList = new ArrayList<>();
+        }
+        if (this.mList.size() > 0) {
             this.mList.clear();
-            if (collection != null) {
-                this.mList.addAll(collection);
-            }
+        }
+        if (collection != null && collection.size() > 0) {
+            this.mList.addAll(collection);
         }
         notifyDataChanged();
     }
