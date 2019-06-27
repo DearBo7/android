@@ -3,6 +3,8 @@
  */
 package com.dan.library.util;
 
+import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +15,20 @@ import java.util.List;
 
 public class FileUtil {
     private static final String TAG = "FileUtil";
+
+    public static File getSaveFile(Context context) {
+        File file = new File(context.getFilesDir(), "pic.jpg");
+        return file;
+    }
+
+    public static File getSaveFileSd(Context context) {
+        String fileUrl = Environment.getExternalStorageDirectory().getPath() + "/iformula/file";
+        File dir = new File(fileUrl);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        return new File(fileUrl, "pic.jpg");
+    }
 
     /**
      * 读取某个文件夹下的所有文件名称,可以根据正则匹配(reg==null:获取所有)

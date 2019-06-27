@@ -1,5 +1,6 @@
 package com.dan.dome.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -11,15 +12,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.dan.dome.R;
+import com.dan.dome.activity.CameraActivity;
 import com.dan.dome.entity.City;
 import com.dan.dome.entity.Material;
 import com.dan.dome.fragment.base.BaseFragment;
 import com.dan.library.util.JsonUtil;
-import com.dan.library.util.ToastUtil;
 import com.dan.ui.adapter.SimpleSpinnerTextFormatter;
 import com.dan.ui.widget.grouplist.ExpandTabView;
 import com.dan.ui.widget.grouplist.ViewMiddle;
 import com.dan.ui.widget.searchselect.SearchSelectDialog;
+import com.xuexiang.xutil.tip.ToastUtils;
 
 import org.angmarch.views.NiceSpinner;
 import org.apache.commons.lang3.StringUtils;
@@ -31,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Dan on 2019/2/19 14:08
@@ -55,6 +58,10 @@ public class OtherFragment extends BaseFragment {
 
     @BindView(R.id.tv_search_result)
     TextView textSearchResultView;
+
+    //打开相机
+    @BindView(R.id.btn_open_camera)
+    Button btnOpenCamera;
 
     private List<City> mDataList;
     private SearchSelectDialog searchSelectDialog;
@@ -111,7 +118,7 @@ public class OtherFragment extends BaseFragment {
                 if (o instanceof Material) {
                     Material material = (Material) o;
                     Log.i(TAG, "选择material:" + JsonUtil.toJson(material));
-                    ToastUtil.makeText(getContext(), "选择material:" + JsonUtil.toJson(material));
+                    ToastUtils.toast("选择material:" + JsonUtil.toJson(material));
                 }
             }
         });
@@ -140,7 +147,7 @@ public class OtherFragment extends BaseFragment {
             @Override
             public void onSelected(String showText, int position, Object t) {
                 textSearchResultView.setText(showText);
-                ToastUtil.makeText(getContext(), "showText:" + showText);
+                ToastUtils.toast("showText:" + showText);
                 Log.i(TAG, "showText:" + showText + ";t:" + JsonUtil.toJson(t));
             }
 
@@ -178,7 +185,7 @@ public class OtherFragment extends BaseFragment {
         //有数据时,取消禁用
         expandTabView.setToggleButton(true);
         Log.i(TAG, "设置默认选中:material:" + JsonUtil.toJson(material));
-        ToastUtil.makeText(getContext(), "设置默认选中:material:" + JsonUtil.toJson(material));
+        ToastUtils.toast("设置默认选中:material:" + JsonUtil.toJson(material));
         if (StringUtils.isNotBlank(viewMiddle.getShowText())) {
             expandTabView.setTitle(viewMiddle.getShowText(), 0);
         }
@@ -196,6 +203,18 @@ public class OtherFragment extends BaseFragment {
                 city.setName(citys[j] + i);
                 mDataList.add(city);
             }
+        }
+    }
+
+    @OnClick({R.id.btn_open_camera})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_open_camera:
+                Intent intent = new Intent(getActivity(), CameraActivity.class);
+                startActivityForResult(intent, 77);
+                break;
+            default:
+                break;
         }
     }
 

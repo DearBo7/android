@@ -9,8 +9,8 @@ import android.widget.ListView;
 
 import com.dan.ui.R;
 import com.dan.ui.adapter.SimpleSpinnerTextFormatter;
-import com.dan.ui.adapter.SimpleTextAdapter;
 import com.dan.ui.adapter.impl.SpinnerTextFormatter;
+import com.dan.ui.adapter.SimpleTextAdapter;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
