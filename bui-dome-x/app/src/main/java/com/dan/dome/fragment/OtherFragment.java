@@ -24,6 +24,7 @@ import com.dan.ui.widget.searchselect.SearchSelectDialog;
 import com.xuexiang.xutil.tip.ToastUtils;
 
 import org.angmarch.views.NiceSpinner;
+import org.angmarch.views.OnSpinnerItemSelectedListener;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -127,6 +128,14 @@ public class OtherFragment extends BaseFragment {
         btnOpenSearchDialog.setOnClickListener(v -> {
             //调用弹出窗口
             searchSelectDialog.show();
+        });
+
+        //下拉框事件
+        niceSpinner.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener() {
+            @Override
+            public void onItemSelected(NiceSpinner parent, View view, int position, long id) {
+                Log.i(TAG, "选择material:" + parent.getSelectedItem());
+            }
         });
 
     }
