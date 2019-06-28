@@ -44,8 +44,8 @@ dependencies {
     /*implementation 'cz.msebera.android:httpclient:4.4.1.2'*/
     /*https://github.com/zeroturnaround/zt-zip*/
     implementation 'org.zeroturnaround:zt-zip:1.13'
-    implementation project(path: ':dan_library')
-    implementation project(path: ':dan_view_library')
+    implementation project(path: ':bui_library')
+    implementation project(path: ':bui_view_library')
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     //解决glide与jetpack冲突的问题

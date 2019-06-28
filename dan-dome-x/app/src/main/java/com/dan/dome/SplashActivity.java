@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.dan.dome.activity.LoginActivity;
 import com.dan.library.util.PermissionsUtil;
 import com.dan.library.util.StatusBarUtils;
-import com.dan.library.util.ToastUtil;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import com.xuexiang.xutil.tip.ToastUtils;
 
 /**
  * Created by Dan on 2019/1/17 15:30
@@ -65,7 +65,7 @@ public class SplashActivity extends AppCompatActivity {
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             init();
         } else {
-            ToastUtil.makeText(getApplicationContext(), "请开通相关权限，否则无法正常使用本应用！");
+            ToastUtils.toast("请开通相关权限，否则无法正常使用本应用！");
             if (permissionSize < maxPermissionSize) {
                 permissions();
             }
