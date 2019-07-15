@@ -8,7 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
 
 /**
- * Created by Dan on 2018/10/15 14:21
+ * Created by Bo on 2018/10/15 14:21
  */
 public class PermissionsUtil implements ActivityCompat.OnRequestPermissionsResultCallback {
 

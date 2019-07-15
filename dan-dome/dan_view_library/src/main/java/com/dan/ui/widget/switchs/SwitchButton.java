@@ -20,7 +20,7 @@ import android.widget.Checkable;
 import com.dan.ui.R;
 
 /**
- * Created by Dan on 2019/3/28 11:36
+ * Created by Bo on 2019/3/28 11:36
  */
 public class SwitchButton extends View implements Checkable {
     //58

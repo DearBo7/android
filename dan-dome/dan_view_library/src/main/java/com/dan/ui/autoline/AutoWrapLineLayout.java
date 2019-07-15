@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Dan on 2019/3/28 16:42
+ * Created by Bo on 2019/3/28 16:42
  */
 public class AutoWrapLineLayout extends ViewGroup {
     public static final int MODE_FILL_PARENT = 0;

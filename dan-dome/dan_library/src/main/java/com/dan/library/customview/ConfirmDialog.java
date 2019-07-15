@@ -8,7 +8,7 @@ import android.content.DialogInterface;
 import com.dan.library.R;
 
 /**
- * Created by Dan on 2018/11/9 14:44
+ * Created by Bo on 2018/11/9 14:44
  */
 public class ConfirmDialog extends Dialog {
 

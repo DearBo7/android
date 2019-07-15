@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by Dan on 2019/2/20 13:11
+ * Created by Bo on 2019/2/20 13:11
  */
 public class DateUtil {
 

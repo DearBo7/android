@@ -3,7 +3,7 @@ package com.dan.dome.networks;
 import com.dan.dome.util.SystemApplication;
 
 /**
- * Created by Dan on 2019/1/17 11:43
+ * Created by Bo on 2019/1/17 11:43
  */
 public class HttpConfig {
 

@@ -6,7 +6,7 @@ import com.dan.library.util.JsonUtil;
 import java.math.BigDecimal;
 
 /**
- * Created by Dan on 2019/1/17 12:24
+ * Created by Bo on 2019/1/17 12:24
  */
 public class Material extends BaseLongEntity {
     private String materialCode;

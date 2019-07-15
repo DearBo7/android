@@ -48,7 +48,7 @@ import com.dan.ui.R;
  * 2016 12 07,fix 禁止侧滑时(isSwipeEnable false)，点击事件不受干扰。
  * 2016 12 09,fix ListView快速滑动快速删除时，偶现菜单不消失的bug。
  * 2018 02 19,fix isSwipeClickEnable(false)当设置禁止侧滑时,然后点击禁止的,会关闭其他已经滑动的【 默认true不会关闭】
- * Created by zhangxutong .
+ * Created by zhangxutong . https://github.com/mcxtzhang/SwipeDelMenuLayout
  * Date: 16/04/24
  */
 public class SwipeMenuLayout extends ViewGroup {

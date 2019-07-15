@@ -31,7 +31,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by Dan on 2018/10/17 12:00
+ * Created by Bo on 2018/10/17 12:00
  */
 public class LoginActivity extends BaseActivity {
 

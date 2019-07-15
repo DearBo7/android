@@ -8,7 +8,7 @@ import io.dcloud.common.util.JSUtil;
 
 /**
  * @fileName: JSUtils.java
- * @author: Dan
+ * @author: Bo
  * @createDate: 2018/9/12 15:57
  * @description: 扩展原生的 JSUtil
  */

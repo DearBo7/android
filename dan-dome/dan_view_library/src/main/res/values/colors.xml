@@ -10,4 +10,8 @@
     <!--etv-expand-bg-color-->
     <color name="item_choose_ere_press_color">#f4f4f4</color>
     <color name="etv_expand_frame">#E0908C8C</color>
+
+    <!--按钮-->
+    <color name="btn_blue">#108EE9</color>
+    <color name="btn_gray">#E0908C8C</color>
 </resources>

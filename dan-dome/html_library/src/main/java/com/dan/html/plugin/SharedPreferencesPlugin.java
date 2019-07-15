@@ -17,7 +17,7 @@ import io.dcloud.common.DHInterface.StandardFeature;
 import io.dcloud.common.util.JSUtil;
 
 /**
- * Created by Dan on 2018/10/9 8:47
+ * Created by Bo on 2018/10/9 8:47
  */
 public class SharedPreferencesPlugin extends StandardFeature {
 

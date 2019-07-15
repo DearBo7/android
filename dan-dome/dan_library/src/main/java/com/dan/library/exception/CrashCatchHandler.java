@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Dan on 2019/2/20 11:43
+ * Created by Bo on 2019/2/20 11:43
  */
 public class CrashCatchHandler implements Thread.UncaughtExceptionHandler {
 

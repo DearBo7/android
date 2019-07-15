@@ -3,7 +3,7 @@ package com.dan.library.entity;
 import com.dan.library.util.JsonUtil;
 
 /**
- * Created by Dan on 2016/1/26.
+ * Created by Bo on 2016/1/26.
  */
 public class AjaxResultGeneric<T> extends BaseSerializable {
 

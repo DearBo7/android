@@ -6,7 +6,7 @@ import android.text.SpannableString;
 import com.dan.ui.adapter.impl.SpinnerTextFormatter;
 
 /**
- * Created by Dan on 2019/2/21 13:38
+ * Created by Bo on 2019/2/21 13:38
  */
 public class SimpleSpinnerTextFormatter implements SpinnerTextFormatter {
 

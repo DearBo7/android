@@ -28,7 +28,7 @@ import io.dcloud.common.DHInterface.StandardFeature;
 
 
 /**
- * Created by Dan on 2018/11/9 14:02
+ * Created by Bo on 2018/11/9 14:02
  */
 public class AppUpdatePlugin extends StandardFeature {
 

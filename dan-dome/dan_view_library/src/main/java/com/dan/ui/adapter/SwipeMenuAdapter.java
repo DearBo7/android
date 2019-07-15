@@ -6,15 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.dan.ui.adapter.impl.SwipeMenuDataAdapter;
+import com.dan.ui.adapter.base.BaseDataAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Dan on 2019/2/25 15:08
+ * Created by Bo on 2019/2/25 15:08
  */
-public abstract class SwipeMenuAdapter<T> extends BaseAdapter implements SwipeMenuDataAdapter<T> {
+public abstract class SwipeMenuAdapter<T> extends BaseAdapter implements BaseDataAdapter<T> {
     private Context mContext;
     private List<T> mList;
     private LayoutInflater mInflater;
@@ -138,6 +138,11 @@ public abstract class SwipeMenuAdapter<T> extends BaseAdapter implements SwipeMe
     }
 
     @Override
+    public T getItemData(int index) {
+        return getItem(index);
+    }
+
+    @Override
     public void setData(List<T> collection) {
         if (this.mList == null) {
             this.mList = new ArrayList<>();
@@ -160,7 +165,7 @@ public abstract class SwipeMenuAdapter<T> extends BaseAdapter implements SwipeMe
     }
 
     @Override
-    public List<T> getDataAll() {
+    public List<T> getDataList() {
         return this.mList;
     }
 

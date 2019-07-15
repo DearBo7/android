@@ -7,7 +7,7 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 /**
- * Created by Dan on 2017/7/25.
+ * Created by Bo on 2017/7/25.
  * 网络判断工具类
  */
 

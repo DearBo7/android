@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Dan on 2018/10/17.
+ * Created by Bo on 2018/10/17.
  */
 
 public class ActivityUtil extends BaseSerializable {

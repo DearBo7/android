@@ -5,7 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 /**
- * Created by Dan on 2019/2/18 11:45
+ * Created by Bo on 2019/2/18 11:45
  */
 public class ApkUtil {
 

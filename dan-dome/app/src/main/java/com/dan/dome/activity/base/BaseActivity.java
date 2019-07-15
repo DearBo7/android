@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Created by Dan on 2018/10/17 13:06
+ * Created by Bo on 2018/10/17 13:06
  */
 public class BaseActivity extends Activity {
 

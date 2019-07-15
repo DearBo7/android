@@ -3,7 +3,7 @@ package com.dan.ui.adapter.impl;
 import android.text.Spannable;
 
 /**
- * Created by Dan on 2019/2/21 13:33
+ * Created by Bo on 2019/2/21 13:33
  */
 public interface SpinnerTextFormatter {
 

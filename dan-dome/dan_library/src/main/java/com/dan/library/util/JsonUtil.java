@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * @fileName: JsonUtil
- * @author: Dan
+ * @author: Bo
  * @createDate: 2018-04-11 9:37.
  * @description: json工具类
  */

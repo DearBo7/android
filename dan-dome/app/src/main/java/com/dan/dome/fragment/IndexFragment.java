@@ -23,7 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by Dan on 2019/2/19 14:08
+ * Created by Bo on 2019/2/19 14:08
  */
 public class IndexFragment extends BaseFragment {
 

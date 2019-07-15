@@ -27,7 +27,7 @@ import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
- * Created by Dan on 2019/2/19 14:08
+ * Created by Bo on 2019/2/19 14:08
  */
 public class MyFragment extends BaseFragment {
     //顶部头像控件

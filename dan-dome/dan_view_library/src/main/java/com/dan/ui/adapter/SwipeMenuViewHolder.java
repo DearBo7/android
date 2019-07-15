@@ -21,7 +21,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 /**
- * Created by Dan on 2019/2/25 15:17
+ * Created by Bo on 2019/2/25 15:17
  */
 public class SwipeMenuViewHolder {
     private SparseArray<View> mViews;

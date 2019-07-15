@@ -13,7 +13,7 @@ import com.dan.library.util.StatusBarUtils;
 import com.dan.library.util.ToastUtil;
 
 /**
- * Created by Dan on 2019/1/17 15:30
+ * Created by Bo on 2019/1/17 15:30
  * 启动页
  */
 public class SplashActivity extends AppCompatActivity {

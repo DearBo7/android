@@ -1,7 +1,7 @@
 package com.dan.dome.entity;
 
 /**
- * Created by Dan on 2019/2/28 16:24
+ * Created by Bo on 2019/2/28 16:24
  */
 public class City {
 

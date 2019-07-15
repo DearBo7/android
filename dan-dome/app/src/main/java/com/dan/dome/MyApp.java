@@ -7,7 +7,7 @@ import com.xuexiang.xutil.XUtil;
 import com.zhouyou.http.EasyHttp;
 
 /**
- * Created by Dan on 2019/1/18 15:21
+ * Created by Bo on 2019/1/18 15:21
  */
 public class MyApp extends Application {
 

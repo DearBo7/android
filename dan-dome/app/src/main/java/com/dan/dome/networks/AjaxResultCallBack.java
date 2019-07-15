@@ -12,7 +12,7 @@ import com.zhouyou.http.exception.ApiException;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Created by Dan on 2019/3/29 9:21
+ * Created by Bo on 2019/3/29 9:21
  */
 public abstract class AjaxResultCallBack<T> extends CallBack<String> {
 

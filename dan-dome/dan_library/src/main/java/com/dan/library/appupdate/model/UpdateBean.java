@@ -6,7 +6,7 @@ import com.dan.library.appupdate.util.DownloadAppUtils;
 import java.io.Serializable;
 
 /**
- * Created by Dan on 2018/11/9 14:54
+ * Created by Bo on 2018/11/9 14:54
  */
 public class UpdateBean implements Serializable {
 

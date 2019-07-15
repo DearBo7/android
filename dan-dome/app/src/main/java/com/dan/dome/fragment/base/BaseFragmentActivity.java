@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Created by Dan on 2019/2/19 13:47
+ * Created by Bo on 2019/2/19 13:47
  */
 public class BaseFragmentActivity extends FragmentActivity {
 

@@ -18,7 +18,7 @@ import com.dan.library.appupdate.model.UpdateBean;
 import com.dan.library.customview.ConfirmDialog;
 
 /**
- * Created by Dan on 2018/11/16 10:25
+ * Created by Bo on 2018/11/16 10:25
  */
 public class DownloadAppUtils {
 

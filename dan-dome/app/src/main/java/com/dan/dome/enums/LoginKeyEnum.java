@@ -1,7 +1,7 @@
 package com.dan.dome.enums;
 
 /**
- * Created by Dan on 2019/2/19 14:57
+ * Created by Bo on 2019/2/19 14:57
  */
 public enum LoginKeyEnum {
 

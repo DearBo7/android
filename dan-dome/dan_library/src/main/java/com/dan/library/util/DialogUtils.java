@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import com.dan.library.R;
 
 /**
- * Created by Dan on 2018/10/17.
+ * Created by Bo on 2018/10/17.
  */
 
 public class DialogUtils {

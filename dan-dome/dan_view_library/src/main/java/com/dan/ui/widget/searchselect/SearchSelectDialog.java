@@ -27,7 +27,7 @@ import java.util.List;
 
 
 /**
- * Created by heziwen on 2017/7/18.
+ * Created by Bo on 2017/7/18.
  */
 
 public class SearchSelectDialog extends Dialog {

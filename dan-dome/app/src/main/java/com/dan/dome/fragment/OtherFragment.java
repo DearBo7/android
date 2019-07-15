@@ -36,7 +36,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by Dan on 2019/2/19 14:08
+ * Created by Bo on 2019/2/19 14:08
  */
 public class OtherFragment extends BaseFragment {
     private static final String TAG = "OtherFragment";
@@ -220,6 +220,7 @@ public class OtherFragment extends BaseFragment {
 
     @Override
     protected void setShowOrHide() {
+
         mainActivity.tvMainTitle.setText("其他");
     }
 }

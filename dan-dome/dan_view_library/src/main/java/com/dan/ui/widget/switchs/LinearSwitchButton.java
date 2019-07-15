@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Dan on 2019/3/28 9:22
+ * Created by Bo on 2019/3/28 9:22
  */
 public class LinearSwitchButton<T> extends LinearLayout {
 

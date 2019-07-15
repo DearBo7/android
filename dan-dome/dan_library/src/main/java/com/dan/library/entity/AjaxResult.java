@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * @fileName: AjaxResult.java
- * @author: Dan
+ * @author: Bo
  * @createDate: 2018/9/12 15:58
  * @description: 结果返回
  */
