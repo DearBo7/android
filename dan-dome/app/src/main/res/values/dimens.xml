@@ -14,5 +14,5 @@
     <dimen name="material_code_value">14sp</dimen>
     <dimen name="material_weight_value">18sp</dimen>
 
-
+    <dimen name="delete_x_height">35dp</dimen>
 </resources>

@@ -156,7 +156,6 @@ public class SearchSelectDialog extends Dialog {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             layout = inflater.inflate(R.layout.item_dialog_select_search, null);
             listView = (ListView) layout.findViewById(R.id.listview);
-            //searchView = (SearchView) layout.findViewById(R.id.searchView);
             searchView = (SearchView) layout.findViewById(R.id.searchView);
             searchBtn = (ImageButton) layout.findViewById(R.id.btn_dialog_select_search);
             closeBtn = (ImageButton) layout.findViewById(R.id.imb_dialog_select_close);

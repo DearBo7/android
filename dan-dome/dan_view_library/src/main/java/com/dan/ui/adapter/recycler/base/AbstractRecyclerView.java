@@ -32,6 +32,7 @@ public abstract class AbstractRecyclerView<T> extends RecyclerView.Adapter<Abstr
             }
             ////更新数据集不是用adapter.notifyDataSetChanged()而是notifyItemInserted(position)与notifyItemRemoved(position) 否则没有动画效果。
             notifyItemInserted(0);
+            //notifyItemRangeChanged(0, 1);
         }
     }
 
@@ -52,7 +53,7 @@ public abstract class AbstractRecyclerView<T> extends RecyclerView.Adapter<Abstr
     public void add(T item) {
         if (item != null) {
             this.mList.add(item);
-            notifyItemInserted(this.mList.size());
+            notifyItemInserted(this.mList.size() - 1);
             //notifyDataChanged();
         }
     }
@@ -82,8 +83,6 @@ public abstract class AbstractRecyclerView<T> extends RecyclerView.Adapter<Abstr
         if (checkIndex(index)) {
             this.mList.remove(index);
             notifyItemRemoved(index);
-            //更新适配器这条后面列表的变化
-            //notifyItemRangeChanged(index, this.mList.size());
             notifyDataSetChanged();
             return true;
         }
@@ -133,7 +132,7 @@ public abstract class AbstractRecyclerView<T> extends RecyclerView.Adapter<Abstr
 
     @Override
     public void clear() {
-        if (this.mList != null && this.mList.size() > 0) {
+        if (checkNotEmpty()) {
             int previousSize = this.mList.size();
             this.mList.clear();
             notifyItemRangeRemoved(0, previousSize);
@@ -144,7 +143,7 @@ public abstract class AbstractRecyclerView<T> extends RecyclerView.Adapter<Abstr
      * 用于自定义条件删除,调用时通过重写
      */
     public boolean customizeRemove(List<T> list) {
-        if (this.mList != null && this.mList.size() > 0) {
+        if (checkNotEmpty()) {
             int previousSize = this.mList.size();
             this.mList.clear();
             notifyItemRangeRemoved(0, previousSize);
@@ -156,6 +155,14 @@ public abstract class AbstractRecyclerView<T> extends RecyclerView.Adapter<Abstr
     public boolean checkIndex(int index) {
 
         return this.mList != null && index > -1 && index < this.mList.size();
+    }
+
+    private boolean checkNotEmpty() {
+        return checkNotEmpty(this.mList);
+    }
+
+    private boolean checkNotEmpty(List<T> mList) {
+        return mList != null && mList.size() > 0;
     }
 
     private boolean checkNotNull() {

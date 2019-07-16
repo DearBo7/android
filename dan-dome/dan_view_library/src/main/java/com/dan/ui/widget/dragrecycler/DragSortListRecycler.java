@@ -6,7 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.dan.ui.R;
 import com.dan.ui.adapter.recycler.RecyclerViewUtil;
 import com.dan.ui.widget.dragrecycler.base.DragTouchHelper;
 import com.dan.ui.widget.dragrecycler.base.OnItemDragSortListener;
@@ -25,6 +30,64 @@ public class DragSortListRecycler extends RecyclerView implements OnItemDragSort
      */
     private DragTouchHelper dragTouchHelper;
 
+    private OnDragSortListener onDragSortListener;
+
+    private Context mContext;
+
+    /**
+     * 无数据是否显示空view
+     */
+    private boolean emptyViewShowFlag = true;
+
+    /**
+     * 无数据显示
+     */
+    private View emptyView;
+
+    private AdapterDataObserver observerData = new AdapterDataObserver() {
+        @Override
+        public void onChanged() {
+            View thisEmptyView = getEmptyView();
+            if (getAdapter().getItemCount() < 1) {
+                thisEmptyView.setVisibility(VISIBLE);
+                DragSortListRecycler.this.setVisibility(GONE);
+            } else {
+                thisEmptyView.setVisibility(GONE);
+                DragSortListRecycler.this.setVisibility(VISIBLE);
+            }
+        }
+
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount) {
+            super.onItemRangeChanged(positionStart, itemCount);
+            onChanged();
+        }
+
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount, @Nullable Object payload) {
+            super.onItemRangeChanged(positionStart, itemCount, payload);
+            onChanged();
+        }
+
+        @Override
+        public void onItemRangeInserted(int positionStart, int itemCount) {
+            super.onItemRangeInserted(positionStart, itemCount);
+            onChanged();
+        }
+
+        @Override
+        public void onItemRangeRemoved(int positionStart, int itemCount) {
+            super.onItemRangeRemoved(positionStart, itemCount);
+            onChanged();
+        }
+
+        @Override
+        public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+            super.onItemRangeMoved(fromPosition, toPosition, itemCount);
+            onChanged();
+        }
+    };
+
     public DragSortListRecycler(@NonNull Context context) {
         this(context, null);
     }
@@ -35,7 +98,12 @@ public class DragSortListRecycler extends RecyclerView implements OnItemDragSort
 
     public DragSortListRecycler(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        setItemAnimator(new DefaultItemAnimator());
+        this.mContext = context;
+
+        DefaultItemAnimator defaultItemAnimator = new DefaultItemAnimator();
+        //局部刷新闪屏问题解决
+        defaultItemAnimator.setSupportsChangeAnimations(false);
+        setItemAnimator(defaultItemAnimator);
 
         touchCallback = new TouchCallback(this);
 
@@ -60,6 +128,44 @@ public class DragSortListRecycler extends RecyclerView implements OnItemDragSort
             DragSortListRecyclerAdapter listAdapter = (DragSortListRecyclerAdapter) adapter;
             listAdapter.setOnItemDragSortListener(this);
         }
+        if (emptyViewShowFlag) {
+            adapter.registerAdapterDataObserver(observerData);
+            observerData.onChanged();
+        }
+    }
+
+    public View getEmptyView() {
+        if (emptyView == null) {
+            TextView textView = new TextView(mContext);
+            textView.setTextSize(20);
+            textView.setGravity(Gravity.CENTER);
+            textView.setTextColor(getResources().getColor(R.color.red));
+            textView.setText("暂无数据...");
+            setEmptyView(textView);
+        }
+        return emptyView;
+    }
+
+    /**
+     * 设置空View
+     *
+     * @param view View
+     */
+    public void setEmptyView(View view) {
+        this.emptyView = view;
+
+        if (emptyViewShowFlag) {
+            ((ViewGroup) this.getRootView()).addView(view);
+        }
+    }
+
+    /**
+     * 设置无数据显示空View
+     *
+     * @param emptyViewShowFlag true
+     */
+    public void setEmptyViewShowFlag(boolean emptyViewShowFlag) {
+        this.emptyViewShowFlag = emptyViewShowFlag;
     }
 
     @Override
@@ -88,6 +194,9 @@ public class DragSortListRecycler extends RecyclerView implements OnItemDragSort
             Collections.swap(mAdapter.getDataList(), srcPosition, targetPosition);
             //更新视图
             mAdapter.notifyItemMoved(srcPosition, targetPosition);
+            if (onDragSortListener != null) {
+                onDragSortListener.onItemMove(srcPosition, targetPosition);
+            }
             //消费事件
             return true;
         }
@@ -101,6 +210,17 @@ public class DragSortListRecycler extends RecyclerView implements OnItemDragSort
      */
     public void isLongPressDrag(boolean enabledFlag) {
         touchCallback.setEnableDrag(enabledFlag);
+    }
+
+    public void setOnDragSortListener(OnDragSortListener onDragSortListener) {
+        this.onDragSortListener = onDragSortListener;
+    }
+
+    public interface OnDragSortListener {
+        /**
+         * 移动是触发
+         */
+        void onItemMove(int srcPosition, int targetPosition);
     }
 
 }
