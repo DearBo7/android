@@ -129,8 +129,8 @@ public abstract class QuickRecyclerAdapter<T> extends AbstractRecyclerView<T> {
 
         public QuickViewHolder(View itemView) {
             super(itemView);
-            mConvertView = itemView;
-            mViews = new SparseArray<>();
+            this.mConvertView = itemView;
+            this.mViews = new SparseArray<>();
         }
 
         public static QuickViewHolder get(Context context, ViewGroup parent, int layoutId) {
@@ -148,7 +148,7 @@ public abstract class QuickRecyclerAdapter<T> extends AbstractRecyclerView<T> {
         }
 
         public QuickViewHolder setText(int viewId, String text) {
-            TextView tv = (TextView) this.findViewById(viewId);
+            TextView tv = this.findViewById(viewId);
             tv.setText(text);
             return this;
         }
