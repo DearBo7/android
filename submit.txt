@@ -7,13 +7,13 @@
 	symlinks = false
 	ignorecase = true
 [remote "origin"]
-	url = https://gitee.com/wbdr/android.git
+	url = https://github.com/DearBo7/android-project.git
 	fetch = +refs/heads/*:refs/remotes/origin/*
 [branch "master"]
 	remote = second
 	merge = refs/heads/master
 [remote "second"]
-	url = https://github.com/DearBo7/android.git
+	url = https://gitee.com/wbdr/android-project.git
 	fetch = +refs/heads/*:refs/remotes/second/*
 
 git push -u second master
