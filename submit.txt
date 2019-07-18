@@ -1,0 +1,24 @@
+﻿【git-config->https://www.cnblogs.com/tinywan/p/8241077.html】
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = https://gitee.com/wbdr/android.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = second
+	merge = refs/heads/master
+[remote "second"]
+	url = https://github.com/DearBo7/android.git
+	fetch = +refs/heads/*:refs/remotes/second/*
+
+git push -u second master
+
+
+git push origin master
+
+git push second master
