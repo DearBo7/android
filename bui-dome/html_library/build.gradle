@@ -40,7 +40,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation(name: 'lib.5plus.base-release', ext: 'aar')
-    api project(path: ':dan_library')
+    api project(path: ':bui-core')
     /*工具类->https://github.com/Blankj/AndroidUtilCode/tree/master/utilcode*/
     implementation 'com.blankj:utilcode:1.23.4'
 }
